@@ -1,0 +1,11 @@
+.NumberPositive {
+    color: #8A4300;
+}
+
+.NumberNegative {
+    color: #0056B3;
+}
+
+.NumberZero {
+    color: #000000;
+}
