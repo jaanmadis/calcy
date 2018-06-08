@@ -1,11 +1,14 @@
 .NumberPositive {
     color: #8A4300;
+    font-size: 4em;
 }
 
 .NumberNegative {
     color: #0056B3;
+    font-size: 4em;
 }
 
 .NumberZero {
     color: #000000;
+    font-size: 4em;
 }
