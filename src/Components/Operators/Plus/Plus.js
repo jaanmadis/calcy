@@ -1,19 +1,15 @@
 import React from 'react';
-import './Number.css';
+import './Plus.css';
 
-const number = (props) => {
+const plus = (props) => {
     const styles = [
-        'Number',
-        props.value > 0 
-            ? 'NumberPositive' 
-            : props.value < 0 
-                ? 'NumberNegative' 
-                : 'NumberZero',
+        'Plus', 
         props.animated
             ? 'Sequence-Animation-Container Sequence-Animation-Inner'
             : undefined
     ];
-    return (
+        
+    return(
         <div 
             className={ styles.join(' ') }
             onClick={ props.onClick ? () => props.onClick(props.id) : undefined }
@@ -21,6 +17,6 @@ const number = (props) => {
             { props.value }
         </div>
     );
-};
+}
 
-export default number;
+export default plus;

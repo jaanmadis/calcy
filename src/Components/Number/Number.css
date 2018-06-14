@@ -1,3 +1,6 @@
+.Number {
+}
+
 .NumberPositive {
     color: #8A4300;
     font-size: 4em;
@@ -9,6 +12,25 @@
 }
 
 .NumberZero {
-    color: #000000;
+    color: black;
     font-size: 4em;
+}
+
+.NumberShow {
+    animation: numberShow 0.5s ease-out forwards
+}
+
+.NumberHide {
+}
+
+@keyframes numberShow {
+    0% {
+        opacity: 1;
+        transform: translate(0);
+        transform: rotate(60deg);
+    }
+    100% {
+        opacity: 0.5;
+        transform: translate(20%);
+    }
 }
