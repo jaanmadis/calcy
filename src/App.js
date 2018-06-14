@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import Operator from './Components/Operators/Operator';
+import Operator1 from './Components/Operators/Operator';
 import Number from './Components/Number/Number';
+import Plus from './Components/Operators/Plus/Plus';
 import { combineStyles } from './Utils/Utils';
 import './App.css';
+
+/** */
 
 const animationDuration = 1000;
 
@@ -24,7 +27,7 @@ class CommutativeTransformation extends Component {
                 <Number
                     value={ this.props.numbers[0] }
                 />
-                <Operator
+                <Operator1
                     value={ this.props.operator }
                 />
                 <Number
@@ -35,10 +38,24 @@ class CommutativeTransformation extends Component {
     }
 }
 
+/** */
+
+const Operator = {
+    PLUS: 0,
+    MINUS: 1
+}
+
 class App extends Component {
     state = {
+        sequence: [
+            { operator: Operator.PLUS, number: 1, },
+            { operator: Operator.PLUS, number: 2, },
+            { operator: Operator.PLUS, number: 3, },
+            { operator: Operator.PLUS, number: 4, },
+            { operator: Operator.PLUS, number: 5, }
+        ],
         numbers: [1, 2, -3, 4, 5],
-        operators: [ '+', '-', '+', '-'],
+        operators: ['+', '-', '+', '-'],
         operator: undefined,
         operatorFlipIndex: 2,
     }
@@ -86,26 +103,38 @@ class App extends Component {
         });
     }
 
+    _handlePlusClick = (index) => {
+        if ((index < 1) || (index >= this.state.sequence.length)) {
+            return;
+        }
+        let newSequence = [...this.state.sequence];
+        const element = newSequence.splice(index, 1)[0];
+        newSequence.splice(index - 1, 0, element);
+        this.setState({
+            sequence: newSequence
+        });
+    }
+
     render() {
         const sequenceBegin = [];
         const sequenceChange = [];
         const sequenceEnd = [];
-        let sequence = undefined;
+        let sequenceA = undefined;
         for (let index = 0; index < this.state.numbers.length; ++index) {
             if (index < this.state.operatorFlipIndex) {
-                sequence = sequenceBegin;
+                sequenceA = sequenceBegin;
             } else {
-                sequence = sequenceEnd;
+                sequenceA = sequenceEnd;
             }
-            sequence.push(
+            sequenceA.push(
                 <Number
                     key={ 'Number' + index }
                     value={ this.state.numbers[index] }
                 />
             );
             if (index < this.state.operators.length) {
-                sequence.push(
-                    <Operator
+                sequenceA.push(
+                    <Operator1
                         id={ index }
                         key={ 'Operator' + index }
                         onClick={ this._handleOperatorClick }
@@ -119,18 +148,21 @@ class App extends Component {
         if (this.state.operatorFlipIndex !== undefined) {
             flip.push(
                 <Number
+                    key={ this.state.numbers[this.state.operatorFlipIndex] }
                     animated
                     value={ this.state.numbers[this.state.operatorFlipIndex] }
                 />
             );
             flip.push(
-                <Operator
+                <Operator1
                     animated
+                    key={ 'kiiii' }
                     value={ this.state.operators[this.state.operatorFlipIndex] }
                 />
             );
             flip.push(
                 <Number
+                    key={ this.state.numbers[this.state.operatorFlipIndex + 1] }
                     animated
                     value={ this.state.numbers[this.state.operatorFlipIndex + 1] }
                 />
@@ -139,12 +171,32 @@ class App extends Component {
             );
         }
 
+        const sequence = this.state.sequence.map((element, index) => {
+            const operator = 
+                <Plus
+                    id={ index }
+                    onClick={ this._handlePlusClick }
+                />
+            return (
+                <span 
+                    key={ element.number.toString() + index }
+                    style={ sequenceStyle }
+                >
+                    { index > 0 ? operator : null }
+                    <Number 
+                        value={ element.number }
+                    />
+                </span>
+            );
+        });
+
         return(
             <div>
                 <CommutativeTransformation 
                     numbers={ [1, 2] }
                     operator={ '+' }
                 />
+                { sequence }
 
                 <span className='Sequence'>
                     { sequenceBegin }

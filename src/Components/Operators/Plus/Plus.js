@@ -14,7 +14,7 @@ const plus = (props) => {
             className={ styles.join(' ') }
             onClick={ props.onClick ? () => props.onClick(props.id) : undefined }
         >
-            { props.value }
+            { '+' }
         </div>
     );
 }
