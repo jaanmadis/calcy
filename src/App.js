@@ -8,6 +8,11 @@ import './App.css';
 
 /** */
 
+const Operator = {
+    PLUS: 0,
+    MINUS: 1
+}
+
 const animationDuration = 1000;
 
 const sequenceStyle = {
@@ -18,6 +23,10 @@ const animationOuterSpinStyle = {
     animation: 'animation-outer-spin ' + animationDuration + 'ms ease-out infinite',
 }
 
+const animationInnerSpinStyle = {
+    animation: 'animation-inner-spin ' + animationDuration + 'ms ease-out infinite',
+}
+
 class CommutativeTransformation extends Component {
     render() {
         return (
@@ -25,12 +34,14 @@ class CommutativeTransformation extends Component {
                 style={ combineStyles([sequenceStyle, animationOuterSpinStyle]) }
             >
                 <Number
+                    style={ animationInnerSpinStyle }
                     value={ this.props.numbers[0] }
                 />
-                <Operator1
-                    value={ this.props.operator }
+                <Plus
+                    style={ animationInnerSpinStyle }
                 />
                 <Number
+                    style={ animationInnerSpinStyle }
                     value={ this.props.numbers[1] }
                 />
             </span>
@@ -39,11 +50,6 @@ class CommutativeTransformation extends Component {
 }
 
 /** */
-
-const Operator = {
-    PLUS: 0,
-    MINUS: 1
-}
 
 class App extends Component {
     state = {

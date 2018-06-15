@@ -1,18 +1,20 @@
 import React from 'react';
-import './Plus.css';
+import { combineStyles } from '../../../Utils/Utils';
+
+const style = {
+    color: 'black',
+    fontSize: '4em',
+}
 
 const plus = (props) => {
     const styles = [
         'Plus', 
-        props.animated
-            ? 'Sequence-Animation-Container Sequence-Animation-Inner'
-            : undefined
     ];
         
     return(
         <div 
-            className={ styles.join(' ') }
             onClick={ props.onClick ? () => props.onClick(props.id) : undefined }
+            style={ combineStyles([style, props.style]) }
         >
             { '+' }
         </div>
