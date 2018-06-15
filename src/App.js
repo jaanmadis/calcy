@@ -199,7 +199,7 @@ class App extends Component {
         return(
             <div>
                 <CommutativeTransformation 
-                    numbers={ [1, 2] }
+                    numbers={ [11, -2] }
                     operator={ '+' }
                 />
                 { sequence }

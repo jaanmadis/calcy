@@ -7,10 +7,6 @@ const style = {
 }
 
 const plus = (props) => {
-    const styles = [
-        'Plus', 
-    ];
-        
     return(
         <div 
             onClick={ props.onClick ? () => props.onClick(props.id) : undefined }
