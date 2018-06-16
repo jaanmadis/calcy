@@ -8,12 +8,12 @@ const style = {
 
 const plus = (props) => {
     return(
-        <div 
+        <span 
             onClick={ props.onClick ? () => props.onClick(props.id) : undefined }
             style={ combineStyles([style, props.style]) }
         >
             { '+' }
-        </div>
+        </span>
     );
 }
 

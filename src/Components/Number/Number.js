@@ -16,7 +16,7 @@ const negativeStyle = {
 
 const number = (props) => {
     return (
-        <div 
+        <span 
             onClick={ props.onClick ? () => props.onClick(props.id) : undefined }
             style={ combineStyles([
                 style, 
@@ -29,7 +29,7 @@ const number = (props) => {
             ]) }
         >
             { props.value }
-        </div>
+        </span>
     );
 };
 

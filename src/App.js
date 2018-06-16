@@ -6,8 +6,7 @@ import CommutativeTransformation from './Components/Transformation/CommutativeTr
 // import Operator1 from './Components/Operators/Operator';
 import Number from './Components/Number/Number';
 import Plus from './Components/Operators/Plus/Plus';
-// import { combineStyles } from './Utils/Utils';
-import { sequenceStyle } from './Styles/Styles';
+import Sequence from './Components/Sequence/Sequence';
 
 const Operator = {
     PLUS: 0,
@@ -81,32 +80,20 @@ class App extends Component {
     }
 
     render() {
-        const sequence = this.state.sequence.map((element, index) => {
-            const operator = 
-                <Plus
-                    id={ index }
-                    onClick={ this._handlePlusClick }
-                />
-            return (
-                <span 
-                    key={ element.number.toString() + index }
-                    style={ sequenceStyle }
-                >
-                    { index > 0 ? operator : null }
-                    <Number 
-                        value={ element.number }
-                    />
-                </span>
-            );
-        });
-
         return(
             <div>
+                <Sequence
+                    onPlusClick={ this._handlePlusClick }
+                    sequence={ this.state.sequence }
+                />
                 <CommutativeTransformation 
                     numbers={ [11, -2] }
                     operator={ '+' }
                 />
-                { sequence }
+                <Sequence
+                    onPlusClick={ this._handlePlusClick }
+                    sequence={ this.state.sequence.slice(2) }
+                />
             </div>
         );
     }

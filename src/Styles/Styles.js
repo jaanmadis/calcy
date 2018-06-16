@@ -1,6 +1,6 @@
 import './Animations.css';
 
-export const sequenceStyle = {
+export const animationInlineFlexStyle = {
     display: 'inline-flex',
 }
 

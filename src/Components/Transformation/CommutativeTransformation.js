@@ -3,12 +3,12 @@ import React from 'react';
 import Number from '../Number/Number';
 import Plus from '../Operators/Plus/Plus';
 import { combineStyles } from '../../Utils/Utils';
-import { sequenceStyle, animationInnerSpinStyle, animationOuterSpinStyle } from '../../Styles/Styles';
+import { animationInlineFlexStyle, animationInnerSpinStyle, animationOuterSpinStyle } from '../../Styles/Styles';
 
 const commutativeTransformation = (props) => {
     return (
         <span 
-            style={ combineStyles([sequenceStyle, animationOuterSpinStyle]) }
+            style={ combineStyles([animationInlineFlexStyle, animationOuterSpinStyle]) }
         >
             <Number
                 style={ animationInnerSpinStyle }
