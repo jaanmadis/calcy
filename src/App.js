@@ -60,13 +60,9 @@ class App extends Component {
             { operator: Operator.PLUS, number: 4, },
             { operator: Operator.PLUS, number: 5, }
         ],
-        numbers: [1, 2, -3, 4, 5],
-        operators: ['+', '-', '+', '-'],
-        operator: undefined,
-        operatorFlipIndex: 2,
     }
 
-    _addNumber = () => {
+    ____addNumber = () => {
         const newNumbers = [...this.state.numbers];
         newNumbers.push(Math.floor(Math.random() * 10));
         this.setState({
@@ -74,7 +70,7 @@ class App extends Component {
         })
     }
 
-    _handleNumberClick = (id) => {
+    ____handleNumberClick = (id) => {
         if ((id === 0) || (id === this.state.numbers.length - 1)) {
             return;
         }
@@ -87,7 +83,7 @@ class App extends Component {
         });
     }
 
-    _handleOperatorClick2 = (index) => {
+    ____handleOperatorClick2 = (index) => {
         if ((typeof index !== 'number') || (index < 0) || (index >= this.state.numbers.length - 1)) {
             return;
         }
@@ -100,7 +96,7 @@ class App extends Component {
         });
     }
 
-    _handleOperatorClick = (index) => {
+    ____handleOperatorClick = (index) => {
         if ((typeof index !== 'number') || (index < 0) || (index >= this.state.numbers.length - 1)) {
             return;
         }
@@ -122,61 +118,6 @@ class App extends Component {
     }
 
     render() {
-        const sequenceBegin = [];
-        const sequenceChange = [];
-        const sequenceEnd = [];
-        let sequenceA = undefined;
-        for (let index = 0; index < this.state.numbers.length; ++index) {
-            if (index < this.state.operatorFlipIndex) {
-                sequenceA = sequenceBegin;
-            } else {
-                sequenceA = sequenceEnd;
-            }
-            sequenceA.push(
-                <Number
-                    key={ 'Number' + index }
-                    value={ this.state.numbers[index] }
-                />
-            );
-            if (index < this.state.operators.length) {
-                sequenceA.push(
-                    <Operator1
-                        id={ index }
-                        key={ 'Operator' + index }
-                        onClick={ this._handleOperatorClick }
-                        value={ this.state.operators[index] }
-                    />
-                );
-            }
-        }
-
-        const flip = [];
-        if (this.state.operatorFlipIndex !== undefined) {
-            flip.push(
-                <Number
-                    key={ this.state.numbers[this.state.operatorFlipIndex] }
-                    animated
-                    value={ this.state.numbers[this.state.operatorFlipIndex] }
-                />
-            );
-            flip.push(
-                <Operator1
-                    animated
-                    key={ 'kiiii' }
-                    value={ this.state.operators[this.state.operatorFlipIndex] }
-                />
-            );
-            flip.push(
-                <Number
-                    key={ this.state.numbers[this.state.operatorFlipIndex + 1] }
-                    animated
-                    value={ this.state.numbers[this.state.operatorFlipIndex + 1] }
-                />
-            );
-            flip.push(
-            );
-        }
-
         const sequence = this.state.sequence.map((element, index) => {
             const operator = 
                 <Plus
@@ -203,50 +144,8 @@ class App extends Component {
                     operator={ '+' }
                 />
                 { sequence }
-
-                <span className='Sequence'>
-                    { sequenceBegin }
-                </span>
-                { 
-                    flip.length > 0 
-                    ?
-                        <span className='Sequence Sequence-Animation-Outer'>
-                            { flip }
-                        </span>
-                    :
-                        undefined
-                }
-                <span className='Sequence'>
-                    { sequenceEnd }
-                </span>
             </div>
         );
-
-        // // !!! index is poor key
-        // const numbers = this.state.numbers.map((number, index) => {
-        //     return (
-        //         <Number 
-        //             animated={ this.state.animated }
-        //             id={ index } 
-        //             key={ index } 
-        //             onClick={ this._handleNumberClick }
-        //             value={ number } 
-        //         />)
-        // });
-        // return (
-        //     <div className='App'>
-        //         <header className='App-header'>
-        //             <img src={logo} className='App-logo' alt='logo' />
-        //             <h1 className='App-title'>Welcome to React</h1>
-        //         </header>
-        //             <div><button onClick={ this._addNumber }>add number</button></div>
-        //             <div><button onClick={ this._addAnimation }>add animation</button></div>
-        //             { numbers }
-        //             {/* <div className='animation'>
-        //             { numbers }
-        //             </div> */}
-        //     </div>
-        // );
     }
 }
 
