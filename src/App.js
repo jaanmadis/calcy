@@ -1,55 +1,18 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import Operator1 from './Components/Operators/Operator';
+
+import CommutativeTransformation from './Components/Transformation/CommutativeTransformation';
+
+// import logo from './logo.svg';
+// import Operator1 from './Components/Operators/Operator';
 import Number from './Components/Number/Number';
 import Plus from './Components/Operators/Plus/Plus';
-import { combineStyles } from './Utils/Utils';
-import './App.css';
-
-/** */
+// import { combineStyles } from './Utils/Utils';
+import { sequenceStyle } from './Styles/Styles';
 
 const Operator = {
     PLUS: 0,
     MINUS: 1
 }
-
-const animationDuration = 1000;
-
-const sequenceStyle = {
-    display: 'inline-flex',
-}
-
-const animationOuterSpinStyle = {
-    animation: 'animation-outer-spin ' + animationDuration + 'ms ease-out infinite',
-}
-
-const animationInnerSpinStyle = {
-    animation: 'animation-inner-spin ' + animationDuration + 'ms ease-out infinite',
-}
-
-class CommutativeTransformation extends Component {
-    render() {
-        return (
-            <span 
-                style={ combineStyles([sequenceStyle, animationOuterSpinStyle]) }
-            >
-                <Number
-                    style={ animationInnerSpinStyle }
-                    value={ this.props.numbers[0] }
-                />
-                <Plus
-                    style={ animationInnerSpinStyle }
-                />
-                <Number
-                    style={ animationInnerSpinStyle }
-                    value={ this.props.numbers[1] }
-                />
-            </span>
-        );
-    }
-}
-
-/** */
 
 class App extends Component {
     state = {
