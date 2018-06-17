@@ -2,7 +2,7 @@ import React from 'react';
 import { combineStyles } from '../../../Utils/Utils';
 
 const style = {
-    color: 'black',
+    color: '#5E8014',
     fontSize: '4em',
 }
 

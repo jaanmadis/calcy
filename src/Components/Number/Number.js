@@ -7,11 +7,11 @@ const style = {
 };
 
 const positiveStyle = {
-    color: '#8A4300',
+    color: '#C75300',
 };
 
 const negativeStyle = {
-    color: '#0056B3',
+    color: '#0079D1',
 };
 
 const number = (props) => {

@@ -22,6 +22,10 @@ class App extends Component {
             { operator: Operator.PLUS, number: 4, },
             { operator: Operator.PLUS, number: 5, }
         ],
+        canHandleChanges: true,
+
+
+
     }
 
     ____addNumber = () => {
@@ -79,24 +83,52 @@ class App extends Component {
         });
     }
 
+    handlePlusClick = (index) => {
+        if (!this.state.canHandleChanges) {
+            return;
+        }
+
+        this.setState({canHandleChanges: false});
+
+        if ((index < 1) || (index >= this.state.sequence.length)) {
+            return;
+        }
+        let newSequence = [...this.state.sequence];
+        const element = newSequence.splice(index, 1)[0];
+        newSequence.splice(index - 1, 0, element);
+        this.setState({
+            sequence: newSequence
+        });
+    }
+
     render() {
         return(
             <div>
-                <Sequence
-                    onPlusClick={ this._handlePlusClick }
-                    sequence={ this.state.sequence }
-                />
+                <br/>
                 <CommutativeTransformation 
-                    numbers={ [11, -2] }
-                    operator={ '+' }
+                    sequence={ this.state.sequence }
+                    transformationIndex={ 1 }
                 />
-                <Sequence
-                    onPlusClick={ this._handlePlusClick }
-                    sequence={ this.state.sequence.slice(2) }
+                <br/>
+                <CommutativeTransformation 
+                    sequence={ this.state.sequence }
+                    transformationIndex={ 2 }
+                />
+                <br/>
+                <CommutativeTransformation 
+                    sequence={ this.state.sequence }
+                    transformationIndex={ 3 }
+                />
+                <br/>
+                <CommutativeTransformation 
+                    sequence={ this.state.sequence }
+                    transformationIndex={ 4 }
                 />
             </div>
         );
     }
 }
+
+// add onclicks to alll numbers and operators
 
 export default App;
