@@ -7,9 +7,9 @@ export const animationInlineFlexStyle = {
 const animationDuration = 1000;
 
 export const animationOuterSpinStyle = {
-    animation: 'animation-outer-spin ' + animationDuration + 'ms ease-out infinite',
+    animation: 'animation-outer-spin ' + animationDuration + 'ms ease-in-out infinite',
 }
 
 export const animationInnerSpinStyle = {
-    animation: 'animation-inner-spin ' + animationDuration + 'ms ease-out infinite',
+    animation: 'animation-inner-spin ' + animationDuration + 'ms ease-in-out infinite',
 }

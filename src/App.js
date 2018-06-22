@@ -20,7 +20,9 @@ class App extends Component {
             { operator: Operator.PLUS, number: 2, },
             { operator: Operator.PLUS, number: 3, },
             { operator: Operator.PLUS, number: 4, },
-            { operator: Operator.PLUS, number: 5, }
+            { operator: Operator.PLUS, number: 5, },
+            { operator: Operator.PLUS, number: 6, },
+            { operator: Operator.PLUS, number: 7, },
         ],
         canHandleChanges: true,
 
@@ -107,22 +109,51 @@ class App extends Component {
                 <br/>
                 <CommutativeTransformation 
                     sequence={ this.state.sequence }
-                    transformationIndex={ 1 }
+                    transformationBegin={ 0 }
+                    transformationCenter={ 1 }
+                    transformationEnd={ 2 }
                 />
                 <br/>
                 <CommutativeTransformation 
                     sequence={ this.state.sequence }
-                    transformationIndex={ 2 }
+                    transformationBegin={ 0 }
+                    transformationCenter={ 1 }
+                    transformationEnd={ 3 }
                 />
                 <br/>
                 <CommutativeTransformation 
                     sequence={ this.state.sequence }
-                    transformationIndex={ 3 }
+                    transformationBegin={ 0 }
+                    transformationCenter={ 1 }
+                    transformationEnd={ 7 }
                 />
                 <br/>
                 <CommutativeTransformation 
                     sequence={ this.state.sequence }
-                    transformationIndex={ 4 }
+                    transformationBegin={ 2 }
+                    transformationCenter={ 6 }
+                    transformationEnd={ 7 }
+                />
+                <br/>
+                <CommutativeTransformation 
+                    sequence={ this.state.sequence }
+                    transformationBegin={ 3 }
+                    transformationCenter={ 6 }
+                    transformationEnd={ 7 }
+                />
+                <br/>
+                <CommutativeTransformation 
+                    sequence={ this.state.sequence }
+                    transformationBegin={ 4 }
+                    transformationCenter={ 6 }
+                    transformationEnd={ 7 }
+                />
+                <br/>
+                <CommutativeTransformation 
+                    sequence={ this.state.sequence }
+                    transformationBegin={ 5 }
+                    transformationCenter={ 6 }
+                    transformationEnd={ 7 }
                 />
             </div>
         );

@@ -4,7 +4,7 @@ import Number from '../Number/Number';
 import Plus from '../Operators/Plus/Plus';
 
 const shouldShow = (begin, end, hide, index) => (
-    (hide === undefined) && (begin === undefined || begin <= index) && (end === undefined || index < end)
+    (hide === undefined) && (begin === undefined || begin <= index) && (end === undefined || index <= end)
 );
 
 const sequence = (props) => {
@@ -21,14 +21,18 @@ const sequence = (props) => {
             operator = 
                 <Plus />
         }
-        return ( 
-            <span
-                key={ element.number.toString() + index }
-            >
-                { operator }
-                { number } 
-            </span>
-        );
+        if (number || operator) {
+            return ( 
+                <span
+                    key={ element.number.toString() + index }
+                >
+                    { operator }
+                    { number } 
+                </span>
+            );
+        } else {
+            return null
+        }
     });
     return (
         <span
