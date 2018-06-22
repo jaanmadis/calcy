@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 
 import CommutativeTransformation from './Components/Transformation/CommutativeTransformation';
+import Negation from './Components/Transformation/NegationTransformation';
 
 // import logo from './logo.svg';
 // import Operator1 from './Components/Operators/Operator';
 import Number from './Components/Number/Number';
-import Plus from './Components/Operators/Plus/Plus';
+import Plus from './Components/Operators/Plus';
 import Sequence from './Components/Sequence/Sequence';
 
 const Operator = {
@@ -106,6 +107,7 @@ class App extends Component {
     render() {
         return(
             <div>
+                <Negation />
                 <br/>
                 <CommutativeTransformation 
                     sequence={ this.state.sequence }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Number from '../Number/Number';
-import Plus from '../Operators/Plus/Plus';
+import Plus from '../Operators/Plus';
 
 const shouldShow = (begin, end, hide, index) => (
     (hide === undefined) && (begin === undefined || begin <= index) && (end === undefined || index <= end)

@@ -13,3 +13,7 @@ export const animationOuterSpinStyle = {
 export const animationInnerSpinStyle = {
     animation: 'animation-inner-spin ' + animationDuration + 'ms ease-in-out infinite',
 }
+
+export const animationSlideLeft = {
+    animation: 'animation-slide-left ' + animationDuration + 'ms ease-in-out infinite',
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { combineStyles } from '../../../Utils/Utils';
+import { combineStyles } from '../../Utils/Utils';
 
 const style = {
     color: '#5E8014',
