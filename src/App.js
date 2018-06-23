@@ -105,8 +105,24 @@ class App extends Component {
     }
 
     render() {
+
+        const zStyle = {
+            position: 'absolute',
+            zIndex: '1',
+        }
+
+
         return(
             <div>
+            <span
+                style={ zStyle }
+            >
+                ZZZZZZZZ
+            </span>
+            <span>
+                AAAAAAAAAAAAA
+            </span>
+            <br/>
                 <Negation />
                 <br/>
                 <CommutativeTransformation 
