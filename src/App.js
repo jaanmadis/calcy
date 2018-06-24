@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 
-import CommutativeTransformation, { duration as commutativeTransformationDuration } from './Components/Transformation/CommutativeTransformation';
-import Negation from './Components/Transformation/NegationTransformation';
-
-// import logo from './logo.svg';
-// import Operator1 from './Components/Operators/Operator';
-import Number from './Components/Number/Number';
-import Plus from './Components/Operators/Plus';
+import CommutativeTransformation from './Components/Transformation/CommutativeTransformation';
+// import NegationTransformation from './Components/Transformation/NegationTransformation';
 import Sequence from './Components/Sequence/Sequence';
 
 const Operator = {
