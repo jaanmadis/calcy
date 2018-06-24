@@ -2,18 +2,17 @@ import './Animations.css';
 
 export const animationInlineFlexStyle = {
     display: 'inline-flex',
+//    border: '1px solid #AA6817',
 }
 
-const animationDuration = 1000;
+export const animationOuterSpinStyle = (duration) => ({
+    animation: 'animation-outer-spin ' + duration + 'ms ease-in-out forwards',
+});
 
-export const animationOuterSpinStyle = {
-    animation: 'animation-outer-spin ' + animationDuration + 'ms ease-in-out infinite',
-}
+export const animationInnerSpinStyle = (duration) => ({
+    animation: 'animation-inner-spin ' + duration + 'ms ease-in-out forwards',
+})
 
-export const animationInnerSpinStyle = {
-    animation: 'animation-inner-spin ' + animationDuration + 'ms ease-in-out infinite',
-}
-
-export const animationSlideLeft = {
-    animation: 'animation-slide-left ' + animationDuration + 'ms ease-in-out infinite',
-}
+export const animationSlideLeft = (duration) => ({
+    animation: 'animation-slide-left ' + duration + 'ms ease-in-out forwards',
+})

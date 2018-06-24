@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import CommutativeTransformation from './Components/Transformation/CommutativeTransformation';
+import CommutativeTransformation, { duration as commutativeTransformationDuration } from './Components/Transformation/CommutativeTransformation';
 import Negation from './Components/Transformation/NegationTransformation';
 
 // import logo from './logo.svg';
@@ -25,10 +25,8 @@ class App extends Component {
             { operator: Operator.PLUS, number: 6, },
             { operator: Operator.PLUS, number: 7, },
         ],
-        canHandleChanges: true,
-
-
-
+        commutativeTransformation: false,
+        commutativeTransformationIndex: 0,
     }
 
     ____addNumber = () => {
@@ -104,76 +102,99 @@ class App extends Component {
         });
     }
 
+    onCommutativeTransformationDone = () => {
+        const newSequence = [...this.state.sequence];
+        const elements = newSequence.splice(this.state.commutativeTransformationIndex, 1)[0];
+        newSequence.splice(this.state.commutativeTransformationIndex - 1, 0, elements)
+        this.setState({
+            sequence: newSequence,
+            commutativeTransformation: false,
+            commutativeTransformationIndex: 0,
+        });
+    }
+
+    onPlusClick = (index) => {
+        this.setState({
+            commutativeTransformation: true,
+            commutativeTransformationIndex: index,
+        });
+    }
+
     render() {
-
-        const zStyle = {
-            position: 'absolute',
-            zIndex: '1',
+        let result = null;
+        if (this.state.commutativeTransformation) {
+            result = (
+                <CommutativeTransformation 
+                    onDone={ this.onCommutativeTransformationDone }
+                    sequence={ this.state.sequence }
+                    transformationBegin={ this.state.commutativeTransformationIndex - 1 }
+                    transformationCenter={ this.state.commutativeTransformationIndex }
+                    transformationEnd={ this.state.commutativeTransformationIndex + 1 }
+                />
+            );
+        } else {
+            result = (
+                <Sequence
+                    onPlusClick={ this.onPlusClick }
+                    operatorBegin={ 1 }
+                    value={ this.state.sequence }
+                />            
+            );
         }
-
 
         return(
             <div>
-            <span
-                style={ zStyle }
-            >
-                ZZZZZZZZ
-            </span>
-            <span>
-                AAAAAAAAAAAAA
-            </span>
-            <br/>
-                <Negation />
-                <br/>
-                <CommutativeTransformation 
-                    sequence={ this.state.sequence }
-                    transformationBegin={ 0 }
-                    transformationCenter={ 1 }
-                    transformationEnd={ 2 }
-                />
-                <br/>
-                <CommutativeTransformation 
-                    sequence={ this.state.sequence }
-                    transformationBegin={ 0 }
-                    transformationCenter={ 1 }
-                    transformationEnd={ 3 }
-                />
-                <br/>
-                <CommutativeTransformation 
-                    sequence={ this.state.sequence }
-                    transformationBegin={ 0 }
-                    transformationCenter={ 1 }
-                    transformationEnd={ 7 }
-                />
-                <br/>
-                <CommutativeTransformation 
-                    sequence={ this.state.sequence }
-                    transformationBegin={ 2 }
-                    transformationCenter={ 6 }
-                    transformationEnd={ 7 }
-                />
-                <br/>
-                <CommutativeTransformation 
-                    sequence={ this.state.sequence }
-                    transformationBegin={ 3 }
-                    transformationCenter={ 6 }
-                    transformationEnd={ 7 }
-                />
-                <br/>
-                <CommutativeTransformation 
-                    sequence={ this.state.sequence }
-                    transformationBegin={ 4 }
-                    transformationCenter={ 6 }
-                    transformationEnd={ 7 }
-                />
-                <br/>
-                <CommutativeTransformation 
-                    sequence={ this.state.sequence }
-                    transformationBegin={ 5 }
-                    transformationCenter={ 6 }
-                    transformationEnd={ 7 }
-                />
+                { result }
             </div>
+            //     <CommutativeTransformation 
+            //         sequence={ this.state.sequence }
+            //         transformationBegin={ 0 }
+            //         transformationCenter={ 1 }
+            //         transformationEnd={ 2 }
+            //     />
+            //     <br/>
+            //     <CommutativeTransformation 
+            //         sequence={ this.state.sequence }
+            //         transformationBegin={ 0 }
+            //         transformationCenter={ 1 }
+            //         transformationEnd={ 3 }
+            //     />
+            //     <br/>
+            //     <CommutativeTransformation 
+            //         sequence={ this.state.sequence }
+            //         transformationBegin={ 0 }
+            //         transformationCenter={ 1 }
+            //         transformationEnd={ 7 }
+            //     />
+            //     <br/>
+            //     <CommutativeTransformation 
+            //         sequence={ this.state.sequence }
+            //         transformationBegin={ 2 }
+            //         transformationCenter={ 6 }
+            //         transformationEnd={ 7 }
+            //     />
+            //     <br/>
+            //     <CommutativeTransformation 
+            //         sequence={ this.state.sequence }
+            //         transformationBegin={ 3 }
+            //         transformationCenter={ 6 }
+            //         transformationEnd={ 7 }
+            //     />
+            //     <br/>
+            //     <CommutativeTransformation 
+            //         sequence={ this.state.sequence }
+            //         transformationBegin={ 4 }
+            //         transformationCenter={ 6 }
+            //         transformationEnd={ 7 }
+            //     />
+            //     <br/>
+            //     <CommutativeTransformation 
+            //         sequence={ this.state.sequence }
+            //         transformationBegin={ 5 }
+            //         transformationCenter={ 6 }
+            //         transformationEnd={ 7 }
+            //     />
+            // </div>
         );
     }
 }

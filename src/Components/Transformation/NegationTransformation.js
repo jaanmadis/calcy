@@ -29,3 +29,23 @@ const negation = () => {
 }
 
 export default negation;
+
+/**
+ * 
+ *         const zStyle = {
+            position: 'absolute',
+            zIndex: '1',
+        }
+            <span
+                style={ zStyle }
+            >
+                ZZZZZZZZ
+            </span>
+            <span>
+                AAAAAAAAAAAAA
+            </span>
+            <br/>
+                <Negation />
+
+ * 
+ */

@@ -1,64 +1,78 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import Sequence from '../Sequence/Sequence';
 import { combineStyles } from '../../Utils/Utils';
 import { animationInlineFlexStyle, animationInnerSpinStyle, animationOuterSpinStyle } from '../../Styles/Styles';
 
-const commutativeTransformation = (props) => {
-    if (
-        props.transformationBegin === undefined 
-        || props.transformationCenter === undefined 
-        || props.transformationEnd === undefined 
-        || props.transformationBegin >= props.transformationCenter
-        || props.transformationCenter >= props.transformationEnd
-        || props.transformationBegin < 0
-        || props.transformationCenter <= 0 
-        || props.transformationEnd > props.sequence.length
-    ) {
-        return null;
+export const duration = 1000;
+
+class CommutativeTransformation extends Component {
+    componentDidMount() {
+        setTimeout(this.onDone, duration);
     }
-    return (
-        <span>
-            <Sequence
-                numberEnd={ props.transformationBegin - 1 }
-                operatorBegin={ 1 }
-                operatorEnd={ props.transformationBegin }
-                value={ props.sequence }
-            />            
-            <span 
-                style={ combineStyles([animationInlineFlexStyle, animationOuterSpinStyle]) }
-            >
+
+    render() {
+        if (
+            this.props.transformationBegin === undefined 
+            || this.props.transformationCenter === undefined 
+            || this.props.transformationEnd === undefined 
+            || this.props.transformationBegin >= this.props.transformationCenter
+            || this.props.transformationCenter >= this.props.transformationEnd
+            || this.props.transformationBegin < 0
+            || this.props.transformationCenter <= 0 
+            || this.props.transformationEnd > this.props.sequence.length
+        ) {
+            return null;
+        }
+        return (
+            <span>
                 <Sequence
-                    numberBegin={ props.transformationBegin }
-                    numberEnd={ props.transformationCenter - 1 }
-                    operatorBegin={ props.transformationBegin + 1 }
-                    operatorEnd={ props.transformationCenter - 1 }
-                    style={ animationInnerSpinStyle }
-                    value={ props.sequence }
-                /> 
+                    numberEnd={ this.props.transformationBegin - 1 }
+                    operatorBegin={ 1 }
+                    operatorEnd={ this.props.transformationBegin }
+                    value={ this.props.sequence }
+                />            
+                <span 
+                    style={ combineStyles([animationInlineFlexStyle, animationOuterSpinStyle(duration)]) }
+                >
+                    <Sequence
+                        numberBegin={ this.props.transformationBegin }
+                        numberEnd={ this.props.transformationCenter - 1 }
+                        operatorBegin={ this.props.transformationBegin + 1 }
+                        operatorEnd={ this.props.transformationCenter - 1 }
+                        style={ animationInnerSpinStyle(duration) }
+                        value={ this.props.sequence }
+                    /> 
+                    <Sequence
+                        numberHide
+                        operatorBegin={ this.props.transformationCenter }
+                        operatorEnd={ this.props.transformationCenter }
+                        style={ animationInnerSpinStyle(duration) }
+                        value={ this.props.sequence }
+                    /> 
+                    <Sequence
+                        numberBegin={ this.props.transformationCenter }
+                        numberEnd={ this.props.transformationEnd - 1 }
+                        operatorBegin={ this.props.transformationCenter + 1 }
+                        operatorEnd={ this.props.transformationEnd - 1 }
+                        style={ animationInnerSpinStyle(duration) }
+                        value={ this.props.sequence }
+                    /> 
+                </span>
                 <Sequence
-                    numberHide
-                    operatorBegin={ props.transformationCenter }
-                    operatorEnd={ props.transformationCenter }
-                    style={ animationInnerSpinStyle }
-                    value={ props.sequence }
-                /> 
-                <Sequence
-                    numberBegin={ props.transformationCenter }
-                    numberEnd={ props.transformationEnd - 1 }
-                    operatorBegin={ props.transformationCenter + 1 }
-                    operatorEnd={ props.transformationEnd - 1 }
-                    style={ animationInnerSpinStyle }
-                    value={ props.sequence }
+                    numberBegin={ this.props.transformationEnd }
+                    operatorBegin={ this.props.transformationEnd }
+                    value={ this.props.sequence }
                 /> 
             </span>
-            <Sequence
-                numberBegin={ props.transformationEnd }
-                operatorBegin={ props.transformationEnd }
-                value={ props.sequence }
-            /> 
-        </span>
-    );
+        );
+    }
+
+    onDone = () => {
+        if (this.props.onDone) {
+            this.props.onDone();
+        }
+    }
 }
 
-export default commutativeTransformation;
+export default CommutativeTransformation;

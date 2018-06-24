@@ -19,7 +19,10 @@ const sequence = (props) => {
         let operator = undefined;
         if (shouldShow(props.operatorBegin, props.operatorEnd, props.operatorHide, index)) {
             operator = 
-                <Plus />
+                <Plus 
+                    index={ index }
+                    onClick={ props.onPlusClick }
+                />
         }
         if (number || operator) {
             return ( 
