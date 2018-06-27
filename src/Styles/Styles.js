@@ -11,8 +11,8 @@ export const animationOuterSpinStyle = (duration) => ({
 
 export const animationInnerSpinStyle = (duration) => ({
     animation: 'animation-inner-spin ' + duration + 'ms ease-in-out forwards',
-})
+});
 
 export const animationSlideLeft = (duration) => ({
     animation: 'animation-slide-left ' + duration + 'ms ease-in-out forwards',
-})
+});

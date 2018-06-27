@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
+import Equal from './Components/Operators/Equal';
 import CommutativeTransformation from './Components/Transformation/CommutativeTransformation';
-// import NegationTransformation from './Components/Transformation/NegationTransformation';
 import Sequence from './Components/Sequence/Sequence';
+import { animationInlineFlexStyle } from './Styles/Styles';
 
 const Operator = {
     PLUS: 0,
@@ -13,11 +14,11 @@ class App extends Component {
     state = {
         sequence: [
             { operator: Operator.PLUS, number: 1, },
-            { operator: Operator.PLUS, number: 2, },
-            { operator: Operator.PLUS, number: 3, },
-            { operator: Operator.PLUS, number: 4, },
-            { operator: Operator.PLUS, number: 5, },
-            { operator: Operator.PLUS, number: 6, },
+            { operator: Operator.PLUS, number: 22, },
+            { operator: Operator.PLUS, number: 3333, },
+            { operator: Operator.PLUS, number: 4444, },
+            { operator: Operator.PLUS, number: 555, },
+            { operator: Operator.PLUS, number: 66, },
             { operator: Operator.PLUS, number: 7, },
         ],
         commutativeTransformation: false,
@@ -132,6 +133,7 @@ class App extends Component {
                 <Sequence
                     onPlusClick={ this.onPlusClick }
                     operatorBegin={ 1 }
+                    style={ animationInlineFlexStyle }
                     value={ this.state.sequence }
                 />            
             );
@@ -140,6 +142,7 @@ class App extends Component {
         return(
             <div>
                 { result }
+                <Equal />
             </div>
             //     <CommutativeTransformation 
             //         sequence={ this.state.sequence }
