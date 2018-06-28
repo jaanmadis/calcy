@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
-import Equal from './Components/Operators/Equal';
 import CommutativeTransformation from './Components/Transformation/CommutativeTransformation';
+import Equal from './Components/Operators/Equal';
+import Result from './Components/Controls/Result';
 import Sequence from './Components/Sequence/Sequence';
 import { animationInlineFlexStyle } from './Styles/Styles';
 
@@ -9,6 +10,8 @@ const Operator = {
     PLUS: 0,
     MINUS: 1
 }
+
+const ENTER_KEY_CODE = 13;
 
 class App extends Component {
     state = {
@@ -25,80 +28,7 @@ class App extends Component {
         commutativeTransformationIndex: 0,
     }
 
-    ____addNumber = () => {
-        const newNumbers = [...this.state.numbers];
-        newNumbers.push(Math.floor(Math.random() * 10));
-        this.setState({
-            numbers: newNumbers,
-        })
-    }
-
-    ____handleNumberClick = (id) => {
-        if ((id === 0) || (id === this.state.numbers.length - 1)) {
-            return;
-        }
-        const newNumbers = [...this.state.numbers];
-        const n = newNumbers[id - 1];
-        newNumbers[id - 1] = newNumbers[id + 1];
-        newNumbers[id + 1] = n;
-        this.setState({ 
-            numbers: newNumbers,
-        });
-    }
-
-    ____handleOperatorClick2 = (index) => {
-        if ((typeof index !== 'number') || (index < 0) || (index >= this.state.numbers.length - 1)) {
-            return;
-        }
-        const newNumbers = [...this.state.numbers];
-        const n = newNumbers[index];
-        newNumbers[index] = newNumbers[index + 1];
-        newNumbers[index + 1] = n;
-        this.setState({
-            numbers: newNumbers,
-        });
-    }
-
-    ____handleOperatorClick = (index) => {
-        if ((typeof index !== 'number') || (index < 0) || (index >= this.state.numbers.length - 1)) {
-            return;
-        }
-        this.setState({
-            operatorFlipIndex: index,
-        });
-    }
-
-    _handlePlusClick = (index) => {
-        if ((index < 1) || (index >= this.state.sequence.length)) {
-            return;
-        }
-        let newSequence = [...this.state.sequence];
-        const element = newSequence.splice(index, 1)[0];
-        newSequence.splice(index - 1, 0, element);
-        this.setState({
-            sequence: newSequence
-        });
-    }
-
-    handlePlusClick = (index) => {
-        if (!this.state.canHandleChanges) {
-            return;
-        }
-
-        this.setState({canHandleChanges: false});
-
-        if ((index < 1) || (index >= this.state.sequence.length)) {
-            return;
-        }
-        let newSequence = [...this.state.sequence];
-        const element = newSequence.splice(index, 1)[0];
-        newSequence.splice(index - 1, 0, element);
-        this.setState({
-            sequence: newSequence
-        });
-    }
-
-    onCommutativeTransformationDone = () => {
+    handleCommutativeTransformationDone = () => {
         const newSequence = [...this.state.sequence];
         const elements = newSequence.splice(this.state.commutativeTransformationIndex, 1)[0];
         newSequence.splice(this.state.commutativeTransformationIndex - 1, 0, elements)
@@ -109,7 +39,11 @@ class App extends Component {
         });
     }
 
-    onPlusClick = (index) => {
+    handleResultKeyDown = (event) => {
+        console.log(event.keyCode === ENTER_KEY_CODE);
+    }
+
+    handlePlusClick = (index) => {
         this.setState({
             commutativeTransformation: true,
             commutativeTransformationIndex: index,
@@ -121,7 +55,7 @@ class App extends Component {
         if (this.state.commutativeTransformation) {
             result = (
                 <CommutativeTransformation 
-                    onDone={ this.onCommutativeTransformationDone }
+                    onDone={ this.handleCommutativeTransformationDone }
                     sequence={ this.state.sequence }
                     transformationBegin={ this.state.commutativeTransformationIndex - 1 }
                     transformationCenter={ this.state.commutativeTransformationIndex }
@@ -131,7 +65,7 @@ class App extends Component {
         } else {
             result = (
                 <Sequence
-                    onPlusClick={ this.onPlusClick }
+                    onPlusClick={ this.handlePlusClick }
                     operatorBegin={ 1 }
                     style={ animationInlineFlexStyle }
                     value={ this.state.sequence }
@@ -143,6 +77,9 @@ class App extends Component {
             <div>
                 { result }
                 <Equal />
+                <Result 
+                    onKeyDown={ this.handleResultKeyDown }
+                />
             </div>
             //     <CommutativeTransformation 
             //         sequence={ this.state.sequence }
