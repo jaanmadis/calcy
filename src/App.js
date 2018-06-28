@@ -5,6 +5,7 @@ import Equal from './Components/Operators/Equal';
 import Result from './Components/Controls/Result';
 import Sequence from './Components/Sequence/Sequence';
 import { animationInlineFlexStyle } from './Styles/Styles';
+import { getCommutativeTransformationParams, getCommutativeTransformationResult } from './Logic/Logic';
 
 const Operator = {
     PLUS: 0,
@@ -24,18 +25,13 @@ class App extends Component {
             { operator: Operator.PLUS, number: 66, },
             { operator: Operator.PLUS, number: 7, },
         ],
-        commutativeTransformation: false,
-        commutativeTransformationIndex: 0,
+        commutativeTransformationParams: undefined,
     }
 
     handleCommutativeTransformationDone = () => {
-        const newSequence = [...this.state.sequence];
-        const elements = newSequence.splice(this.state.commutativeTransformationIndex, 1)[0];
-        newSequence.splice(this.state.commutativeTransformationIndex - 1, 0, elements)
         this.setState({
-            sequence: newSequence,
-            commutativeTransformation: false,
-            commutativeTransformationIndex: 0,
+            sequence: getCommutativeTransformationResult(this.state.sequence, this.state.commutativeTransformationParams),
+            commutativeTransformationParams: undefined,
         });
     }
 
@@ -45,21 +41,20 @@ class App extends Component {
 
     handlePlusClick = (index) => {
         this.setState({
-            commutativeTransformation: true,
-            commutativeTransformationIndex: index,
+            commutativeTransformationParams: getCommutativeTransformationParams(this.state.sequence, index),
         });
     }
 
     render() {
-        let result = null;
-        if (this.state.commutativeTransformation) {
+        let result = undefined;
+        if (this.state.commutativeTransformationParams) {
             result = (
                 <CommutativeTransformation 
                     onDone={ this.handleCommutativeTransformationDone }
                     sequence={ this.state.sequence }
-                    transformationBegin={ this.state.commutativeTransformationIndex - 1 }
-                    transformationCenter={ this.state.commutativeTransformationIndex }
-                    transformationEnd={ this.state.commutativeTransformationIndex + 1 }
+                    transformationBegin={ this.state.commutativeTransformationParams.begin }
+                    transformationCenter={ this.state.commutativeTransformationParams.center }
+                    transformationEnd={ this.state.commutativeTransformationParams.end }
                 />
             );
         } else {
@@ -133,7 +128,5 @@ class App extends Component {
         );
     }
 }
-
-// add onclicks to alll numbers and operators
 
 export default App;

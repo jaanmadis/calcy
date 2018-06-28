@@ -22,7 +22,7 @@ class CommutativeTransformation extends Component {
             || this.props.transformationCenter <= 0 
             || this.props.transformationEnd > this.props.sequence.length
         ) {
-            return null;
+            return undefined;
         }
         return (
             <span>
