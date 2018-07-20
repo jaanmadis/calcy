@@ -3,6 +3,7 @@ import { combineStyles } from '../../Utils/Utils';
 
 const style = {
     fontSize: '4em',
+    width: '300px',
 }
 
 const result = (props) => (

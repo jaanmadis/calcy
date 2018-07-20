@@ -14,13 +14,17 @@ const Operator = {
 
 const ENTER_KEY_CODE = 13;
 
+const style = {
+    textAlign: 'center',
+}
+
 class App extends Component {
     state = {
         sequence: [
             { operator: Operator.PLUS, number: 1, },
             { operator: Operator.PLUS, number: 22, },
             { operator: Operator.PLUS, number: 3333, },
-            { operator: Operator.PLUS, number: 4444, },
+            { operator: Operator.PLUS, number: 44444, },
             { operator: Operator.PLUS, number: 555, },
             { operator: Operator.PLUS, number: 66, },
             { operator: Operator.PLUS, number: 7, },
@@ -46,9 +50,9 @@ class App extends Component {
     }
 
     render() {
-        let result = undefined;
+        let sequence = undefined;
         if (this.state.commutativeTransformationParams) {
-            result = (
+            sequence = (
                 <CommutativeTransformation 
                     onDone={ this.handleCommutativeTransformationDone }
                     sequence={ this.state.sequence }
@@ -58,7 +62,7 @@ class App extends Component {
                 />
             );
         } else {
-            result = (
+            sequence = (
                 <Sequence
                     onPlusClick={ this.handlePlusClick }
                     operatorBegin={ 1 }
@@ -69,8 +73,10 @@ class App extends Component {
         }
 
         return(
-            <div>
-                { result }
+            <div
+                style={ style }
+            >
+                { sequence }
                 <Equal />
                 <Result 
                     onKeyDown={ this.handleResultKeyDown }
