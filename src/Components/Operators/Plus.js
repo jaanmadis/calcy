@@ -1,8 +1,9 @@
 import React from 'react';
 import { combineStyles } from '../../Utils/Utils';
+import { colorPlus } from '../../Styles/Colors';
 
 const style = {
-    color: '#5E8014',
+    color: colorPlus,
     fontSize: '4em',
     cursor: 'pointer',
 }

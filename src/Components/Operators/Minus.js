@@ -1,8 +1,10 @@
 import React from 'react';
 import { combineStyles } from '../../Utils/Utils';
+import { colorMinus } from '../../Styles/Colors';
+
 
 const style = {
-    color: '#5B7B73',
+    color: colorMinus,
     fontSize: '4em',
 }
 

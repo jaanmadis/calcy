@@ -1,7 +1,9 @@
 import React from 'react';
 import { combineStyles } from '../../Utils/Utils';
+import { colorNeutralGray } from '../../Styles/Colors';
 
 const style = {
+    color: colorNeutralGray,
     fontSize: '4em',
 }
 

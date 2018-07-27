@@ -1,5 +1,6 @@
 import React from 'react';
 import { combineStyles } from '../../Utils/Utils';
+import { colorPositive, colorNegative } from '../../Styles/Colors';
 
 const style = {
     color: 'black',
@@ -7,11 +8,11 @@ const style = {
 };
 
 export const positiveStyle = {
-    color: '#C75300',
+    color: colorPositive,
 };
 
 export const negativeStyle = {
-    color: '#0079D1',
+    color: colorNegative,
 };
 
 const number = (props) => {

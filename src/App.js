@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import CommutativeTransformation from './Components/Transformation/CommutativeTransformation';
 import Equal from './Components/Operators/Equal';
 import Result from './Components/Controls/Result';
+import Submit from './Components/Controls/Submit';
 import Sequence from './Components/Sequence/Sequence';
 import { inlineFlexStyle } from './Styles/Styles';
 import { getCommutativeTransformationParams, getCommutativeTransformationResult } from './Logic/Logic';
@@ -42,8 +43,9 @@ class App extends Component {
     }
 
     handleResultKeyDown = (event) => {
-        // console.log(event.keyCode);
-        // console.log(event.keyCode === ENTER_KEY_CODE);
+        if (event.keyCode === ENTER_KEY_CODE) {
+            this.handleSubmitClick();
+        }
     }
 
     handleResultChange = (event) => {
@@ -53,6 +55,11 @@ class App extends Component {
                 result: value,
             });
         }
+    }
+
+    handleSubmitClick = (event) => {
+        console.log(event);
+        console.log('this is submit');
     }
 
     handlePlusClick = (index) => {
@@ -95,56 +102,10 @@ class App extends Component {
                     onKeyDown={ this.handleResultKeyDown }
                     value={ this.state.result }
                 />
+                <Submit 
+                    onClick={ this.handleSubmitClick }
+                />
             </div>
-            //     <CommutativeTransformation 
-            //         sequence={ this.state.sequence }
-            //         transformationBegin={ 0 }
-            //         transformationCenter={ 1 }
-            //         transformationEnd={ 2 }
-            //     />
-            //     <br/>
-            //     <CommutativeTransformation 
-            //         sequence={ this.state.sequence }
-            //         transformationBegin={ 0 }
-            //         transformationCenter={ 1 }
-            //         transformationEnd={ 3 }
-            //     />
-            //     <br/>
-            //     <CommutativeTransformation 
-            //         sequence={ this.state.sequence }
-            //         transformationBegin={ 0 }
-            //         transformationCenter={ 1 }
-            //         transformationEnd={ 7 }
-            //     />
-            //     <br/>
-            //     <CommutativeTransformation 
-            //         sequence={ this.state.sequence }
-            //         transformationBegin={ 2 }
-            //         transformationCenter={ 6 }
-            //         transformationEnd={ 7 }
-            //     />
-            //     <br/>
-            //     <CommutativeTransformation 
-            //         sequence={ this.state.sequence }
-            //         transformationBegin={ 3 }
-            //         transformationCenter={ 6 }
-            //         transformationEnd={ 7 }
-            //     />
-            //     <br/>
-            //     <CommutativeTransformation 
-            //         sequence={ this.state.sequence }
-            //         transformationBegin={ 4 }
-            //         transformationCenter={ 6 }
-            //         transformationEnd={ 7 }
-            //     />
-            //     <br/>
-            //     <CommutativeTransformation 
-            //         sequence={ this.state.sequence }
-            //         transformationBegin={ 5 }
-            //         transformationCenter={ 6 }
-            //         transformationEnd={ 7 }
-            //     />
-            // </div>
         );
     }
 }
