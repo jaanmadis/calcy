@@ -13,6 +13,7 @@ const Operator = {
 }
 
 const ENTER_KEY_CODE = 13;
+const VALID_INPUT = /^-?[0-9]*$/;
 
 const style = {
     textAlign: 'center',
@@ -30,6 +31,7 @@ class App extends Component {
             { operator: Operator.PLUS, number: 7, },
         ],
         commutativeTransformationParams: undefined,
+        result: '',
     }
 
     handleCommutativeTransformationDone = () => {
@@ -40,7 +42,17 @@ class App extends Component {
     }
 
     handleResultKeyDown = (event) => {
-        console.log(event.keyCode === ENTER_KEY_CODE);
+        // console.log(event.keyCode);
+        // console.log(event.keyCode === ENTER_KEY_CODE);
+    }
+
+    handleResultChange = (event) => {
+        const value = event.target.value;
+        if (VALID_INPUT.test(value)) {
+            this.setState({
+                result: value,
+            });
+        }
     }
 
     handlePlusClick = (index) => {
@@ -79,7 +91,9 @@ class App extends Component {
                 { sequence }
                 <Equal />
                 <Result 
+                    onChange={ this.handleResultChange }
                     onKeyDown={ this.handleResultKeyDown }
+                    value={ this.state.result }
                 />
             </div>
             //     <CommutativeTransformation 

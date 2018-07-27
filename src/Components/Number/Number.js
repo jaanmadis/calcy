@@ -6,11 +6,11 @@ const style = {
     fontSize: '4em',
 };
 
-const positiveStyle = {
+export const positiveStyle = {
     color: '#C75300',
 };
 
-const negativeStyle = {
+export const negativeStyle = {
     color: '#0079D1',
 };
 
