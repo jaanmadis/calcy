@@ -4,6 +4,7 @@ import { combineStyles } from '../../Utils/Utils';
 const style = {
     color: '#5E8014',
     fontSize: '4em',
+    cursor: 'pointer',
 }
 
 const plus = (props) => {

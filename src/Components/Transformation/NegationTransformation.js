@@ -4,7 +4,7 @@ import Minus from '../Operators/Minus';
 import Number from '../Number/Number';
 import Plus from '../Operators/Plus';
 import { combineStyles } from '../../Utils/Utils';
-import { animationInlineFlexStyle, animationSlideLeft } from '../../Styles/Styles';
+import { inlineFlexStyle, animationSlideLeft } from '../../Styles/Styles';
 
 const negation = () => {
     return (
@@ -20,7 +20,7 @@ const negation = () => {
 
 
             <span 
-                style={ combineStyles([animationInlineFlexStyle, animationSlideLeft]) }
+                style={ combineStyles([inlineFlexStyle, animationSlideLeft]) }
             >
                 <Minus />
             </span>

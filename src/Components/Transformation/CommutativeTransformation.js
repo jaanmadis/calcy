@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Sequence from '../Sequence/Sequence';
 import { combineStyles } from '../../Utils/Utils';
-import { animationInlineFlexStyle, animationInnerSpinStyle, animationOuterSpinStyle } from '../../Styles/Styles';
+import { inlineFlexStyle, animationInnerSpinStyle, animationOuterSpinStyle } from '../../Styles/Styles';
 
 export const duration = 1000;
 
@@ -33,7 +33,7 @@ class CommutativeTransformation extends Component {
                     value={ this.props.sequence }
                 />            
                 <span 
-                    style={ combineStyles([animationInlineFlexStyle, animationOuterSpinStyle(duration)]) }
+                    style={ combineStyles([inlineFlexStyle, animationOuterSpinStyle(duration)]) }
                 >
                     <Sequence
                         numberBegin={ this.props.transformationBegin }

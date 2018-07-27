@@ -4,7 +4,7 @@ import CommutativeTransformation from './Components/Transformation/CommutativeTr
 import Equal from './Components/Operators/Equal';
 import Result from './Components/Controls/Result';
 import Sequence from './Components/Sequence/Sequence';
-import { animationInlineFlexStyle } from './Styles/Styles';
+import { inlineFlexStyle } from './Styles/Styles';
 import { getCommutativeTransformationParams, getCommutativeTransformationResult } from './Logic/Logic';
 
 const Operator = {
@@ -66,7 +66,7 @@ class App extends Component {
                 <Sequence
                     onPlusClick={ this.handlePlusClick }
                     operatorBegin={ 1 }
-                    style={ animationInlineFlexStyle }
+                    style={ inlineFlexStyle }
                     value={ this.state.sequence }
                 />            
             );

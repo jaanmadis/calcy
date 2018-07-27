@@ -1,6 +1,6 @@
 import './Animations.css';
 
-export const animationInlineFlexStyle = {
+export const inlineFlexStyle = {
     display: 'inline-flex',
 //    border: '1px solid #AA6817',
 }
