@@ -105,6 +105,9 @@ class App extends Component {
                 <Submit 
                     onClick={ this.handleSubmitClick }
                 />
+                <div>
+                    { 'your result is wrong!' }
+                </div>
             </div>
         );
     }
