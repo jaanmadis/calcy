@@ -5,7 +5,8 @@ import Equal from './Components/Operators/Equal';
 import Result from './Components/Controls/Result';
 import Submit from './Components/Controls/Submit';
 import Sequence from './Components/Sequence/Sequence';
-import { inlineFlexStyle } from './Styles/Styles';
+import { combineStyles } from './Utils/Utils';
+import { animationWrong, inlineFlexStyle } from './Styles/Styles';
 import { getCommutativeTransformationParams, getCommutativeTransformationResult } from './Logic/Logic';
 
 const Operator = {
@@ -33,6 +34,50 @@ class App extends Component {
         ],
         commutativeTransformationParams: undefined,
         result: '',
+    }
+
+    render() {
+        let sequence = undefined;
+        if (this.state.commutativeTransformationParams) {
+            sequence = (
+                <CommutativeTransformation 
+                    onDone={ this.handleCommutativeTransformationDone }
+                    sequence={ this.state.sequence }
+                    transformationBegin={ this.state.commutativeTransformationParams.begin }
+                    transformationCenter={ this.state.commutativeTransformationParams.center }
+                    transformationEnd={ this.state.commutativeTransformationParams.end }
+                />
+            );
+        } else {
+            sequence = (
+                <Sequence
+                    onPlusClick={ this.handlePlusClick }
+                    operatorBegin={ 1 }
+                    style={ inlineFlexStyle }
+                    value={ this.state.sequence }
+                />            
+            );
+        }
+
+        return(
+            <div
+                style={ combineStyles([style, animationWrong()]) }
+            >
+                { sequence }
+                <Equal />
+                <Result 
+                    onChange={ this.handleResultChange }
+                    onKeyDown={ this.handleResultKeyDown }
+                    value={ this.state.result }
+                />
+                <Submit 
+                    onClick={ this.handleSubmitClick }
+                />
+                <div>
+                    { 'your result is wrong!' }
+                </div>
+            </div>
+        );
     }
 
     handleCommutativeTransformationDone = () => {
@@ -66,50 +111,6 @@ class App extends Component {
         this.setState({
             commutativeTransformationParams: getCommutativeTransformationParams(this.state.sequence, index),
         });
-    }
-
-    render() {
-        let sequence = undefined;
-        if (this.state.commutativeTransformationParams) {
-            sequence = (
-                <CommutativeTransformation 
-                    onDone={ this.handleCommutativeTransformationDone }
-                    sequence={ this.state.sequence }
-                    transformationBegin={ this.state.commutativeTransformationParams.begin }
-                    transformationCenter={ this.state.commutativeTransformationParams.center }
-                    transformationEnd={ this.state.commutativeTransformationParams.end }
-                />
-            );
-        } else {
-            sequence = (
-                <Sequence
-                    onPlusClick={ this.handlePlusClick }
-                    operatorBegin={ 1 }
-                    style={ inlineFlexStyle }
-                    value={ this.state.sequence }
-                />            
-            );
-        }
-
-        return(
-            <div
-                style={ style }
-            >
-                { sequence }
-                <Equal />
-                <Result 
-                    onChange={ this.handleResultChange }
-                    onKeyDown={ this.handleResultKeyDown }
-                    value={ this.state.result }
-                />
-                <Submit 
-                    onClick={ this.handleSubmitClick }
-                />
-                <div>
-                    { 'your result is wrong!' }
-                </div>
-            </div>
-        );
     }
 }
 

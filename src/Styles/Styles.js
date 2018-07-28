@@ -26,3 +26,7 @@ export const animationInnerSpinStyle = (duration) => ({
 export const animationSlideLeft = (duration) => ({
     animation: 'animation-slide-left ' + duration + 'ms ease-in-out forwards',
 });
+
+export const animationWrong = (duration = 1000) => ({
+    animation: 'animation-wrong ' + duration + 'ms ease-out forwards',
+});
