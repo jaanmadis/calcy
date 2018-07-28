@@ -1,23 +1,54 @@
-import React from 'react';
-import { colorNeutralGray } from '../../Styles/Colors';
+import React, { Component } from 'react';
+
+import { combineStyles } from '../../Utils/Utils';
+import { colorBlackGray, colorDarkGray, colorDarkerGray, colorNeutralGray } from '../../Styles/Colors';
 
 const style = {
-    backgroundColor: '#CCCCCC',
+    backgroundColor: colorDarkGray,
     border: '4px solid ' + colorNeutralGray,
+    borderRadius: '10px',
     color: colorNeutralGray,
     fontSize: '3em',
     marginLeft: '6px',
     outline: 'none',
     width: '100px',
+    transition: 'color 500ms, background 500ms',    
 }
 
-const submit = (props) => (
-    <button
-        style={ style }
-        onClick={ props.onClick }
-    >
-        { '\u2BC8' }
-    </button>
-);
+const hoverStyle = {
+    backgroundColor: colorDarkerGray,
+    color: colorBlackGray,
+}
 
-export default submit;
+class Submit extends Component {
+    state = {
+        isHovering: false,
+    }
+
+    render() {
+        return (
+            <button
+                style={ combineStyles([style, this.state.isHovering ? hoverStyle : undefined]) }
+                onClick={ this.props.onClick }
+                onMouseEnter={ this.handleMouseEnter }
+                onMouseLeave={ this.handleMouseLeave }
+            >
+                { '\u2BC8' }
+            </button>
+        );
+    }
+
+    handleMouseEnter = () => {
+        this.setState({
+            isHovering: true,
+        });
+    }
+
+    handleMouseLeave = () => {
+        this.setState({
+            isHovering: false,
+        });
+    }
+}
+
+export default Submit;

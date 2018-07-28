@@ -1,9 +1,19 @@
 import './Animations.css';
 
+import { colorPositive, colorNegative } from './Colors';
+
 export const inlineFlexStyle = {
     display: 'inline-flex',
 //    border: '1px solid #AA6817',
 }
+
+export const positiveStyle = {
+    color: colorPositive,
+};
+
+export const negativeStyle = {
+    color: colorNegative,
+};
 
 export const animationOuterSpinStyle = (duration) => ({
     animation: 'animation-outer-spin ' + duration + 'ms ease-in-out forwards',

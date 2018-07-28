@@ -1,10 +1,12 @@
 import React from 'react'
+
 import { combineStyles } from '../../Utils/Utils';
-import { positiveStyle, negativeStyle } from '../Number/Number';
 import { colorNeutralGray } from '../../Styles/Colors';
+import { positiveStyle, negativeStyle } from '../../Styles/Styles';
 
 const style = {
     border: '4px solid ' + colorNeutralGray,
+    borderRadius: '10px',
     fontSize: '4em',
     textAlign: 'center',
     outline: 'none',
