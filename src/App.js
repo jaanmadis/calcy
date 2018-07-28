@@ -6,13 +6,8 @@ import Result from './Components/Controls/Result';
 import Submit from './Components/Controls/Submit';
 import Sequence from './Components/Sequence/Sequence';
 import { combineStyles } from './Utils/Utils';
-import { animationWrong, inlineFlexStyle } from './Styles/Styles';
-import { getCommutativeTransformationParams, getCommutativeTransformationResult } from './Logic/Logic';
-
-const Operator = {
-    PLUS: 0,
-    MINUS: 1
-}
+import { animationAccepted, animationRejected, inlineFlexStyle } from './Styles/Styles';
+import { getCommutativeTransformationParams, getCommutativeTransformationResult, Operator } from './Logic/Logic';
 
 const ENTER_KEY_CODE = 13;
 const VALID_INPUT = /^-?[0-9]*$/;
@@ -33,7 +28,12 @@ class App extends Component {
             { operator: Operator.PLUS, number: 7, },
         ],
         commutativeTransformationParams: undefined,
-        result: '',
+        result: {
+            expected: 48428,
+            value: '',
+            accepted: false,
+            rejected: false,
+        }
     }
 
     render() {
@@ -59,23 +59,27 @@ class App extends Component {
             );
         }
 
+        const resultStyle = 
+            this.state.result.accepted
+                ? animationAccepted() 
+                : this.state.result.rejected 
+                    ? animationRejected() 
+                    : undefined;
+
         return(
             <div
-                style={ combineStyles([style, animationWrong()]) }
+                style={ combineStyles([style, resultStyle]) }
             >
                 { sequence }
                 <Equal />
                 <Result 
                     onChange={ this.handleResultChange }
                     onKeyDown={ this.handleResultKeyDown }
-                    value={ this.state.result }
+                    value={ this.state.result.value }
                 />
                 <Submit 
                     onClick={ this.handleSubmitClick }
                 />
-                <div>
-                    { 'your result is wrong!' }
-                </div>
             </div>
         );
     }
@@ -95,17 +99,32 @@ class App extends Component {
 
     handleResultChange = (event) => {
         const value = event.target.value;
-        if (VALID_INPUT.test(value)) {
+        if (VALID_INPUT.test(value) && !this.state.result.accepted) {
+            const newResult = {
+                ...this.state.result
+            };
+            newResult.value = value;
+            newResult.accepted = false;
+            newResult.rejected = false;
             this.setState({
-                result: value,
+                result: newResult
             });
         }
     }
 
     handleSubmitClick = (event) => {
-        console.log(event);
-        console.log('this is submit');
-    }
+        if (!this.state.result.accepted) {
+            const newResult = {
+                ...this.state.result
+            }
+            const accepted = this.state.result.value == this.state.result.expected;
+            newResult.accepted = accepted;
+            newResult.rejected = !accepted;
+            this.setState({
+                result: newResult
+            });
+        }
+}
 
     handlePlusClick = (index) => {
         this.setState({

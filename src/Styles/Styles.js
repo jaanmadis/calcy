@@ -27,6 +27,10 @@ export const animationSlideLeft = (duration) => ({
     animation: 'animation-slide-left ' + duration + 'ms ease-in-out forwards',
 });
 
-export const animationWrong = (duration = 1000) => ({
-    animation: 'animation-wrong ' + duration + 'ms ease-out forwards',
+export const animationAccepted = (duration = 1000) => ({
+    animation: 'animation-accepted ' + duration + 'ms ease-out forwards',
+});
+
+export const animationRejected = (duration = 1000) => ({
+    animation: 'animation-rejected ' + duration + 'ms ease-out forwards',
 });
