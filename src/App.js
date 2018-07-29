@@ -7,7 +7,7 @@ import Submit from './Components/Controls/Submit';
 import Sequence from './Components/Sequence/Sequence';
 import { combineStyles } from './Utils/Utils';
 import { animationAccepted, animationRejected, inlineFlexStyle } from './Styles/Styles';
-import { getCommutativeTransformationParams, getCommutativeTransformationResult, Operator } from './Logic/Logic';
+import { calculate, getCommutativeTransformationParams, getCommutativeTransformationResult, getSequence } from './Logic/Logic';
 
 const ENTER_KEY_CODE = 13;
 const VALID_INPUT = /^-?[0-9]*$/;
@@ -16,25 +16,28 @@ const style = {
     textAlign: 'center',
 }
 
+// plus, positive
+// plus, negative   ??
+// minus, positive  ??
+// minus, negative  ??
+
 class App extends Component {
     state = {
-        sequence: [
-            { operator: Operator.PLUS, number: 1, },
-            { operator: Operator.PLUS, number: 22, },
-            { operator: Operator.PLUS, number: 3333, },
-            { operator: Operator.PLUS, number: 44444, },
-            { operator: Operator.MINUS, number: 555, },
-            { operator: Operator.PLUS, number: 66, },
-            { operator: Operator.PLUS, number: 7, },
-        ],
+        sequence: [],
         commutativeTransformationParams: undefined,
         result: {
-            expected: 48428,
+            expected: 0,
             value: '',
             accepted: false,
             rejected: false,
         }
     }
+
+    constructor(props) {
+        super(props);
+        this.state.sequence = getSequence(0, 20, 5); // generate negative numbers too zzz
+        this.state.result.expected = calculate(this.state.sequence);
+    }    
 
     render() {
         let sequence = undefined;

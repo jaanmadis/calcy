@@ -10,7 +10,7 @@ const style = {
     fontSize: '4em',
     textAlign: 'center',
     outline: 'none',
-    width: '300px',
+    width: '200px',
 }
 
 const result = (props) => (
