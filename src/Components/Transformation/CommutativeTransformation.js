@@ -4,11 +4,11 @@ import Sequence from '../Sequence/Sequence';
 import { combineStyles } from '../../Utils/Utils';
 import { inlineFlexStyle, animationInnerSpinStyle, animationOuterSpinStyle } from '../../Styles/Styles';
 
-export const duration = 1000;
+const DURATION = 1000;
 
 class CommutativeTransformation extends Component {
     componentDidMount() {
-        setTimeout(this.onDone, duration);
+        setTimeout(this.onDone, DURATION);
     }
 
     render() {
@@ -33,21 +33,21 @@ class CommutativeTransformation extends Component {
                     value={ this.props.sequence }
                 />            
                 <span 
-                    style={ combineStyles([inlineFlexStyle, animationOuterSpinStyle(duration)]) }
+                    style={ combineStyles([inlineFlexStyle, animationOuterSpinStyle(DURATION)]) }
                 >
                     <Sequence
                         numberBegin={ this.props.transformationBegin }
                         numberEnd={ this.props.transformationCenter - 1 }
                         operatorBegin={ this.props.transformationBegin + 1 }
                         operatorEnd={ this.props.transformationCenter - 1 }
-                        style={ animationInnerSpinStyle(duration) }
+                        style={ animationInnerSpinStyle(DURATION) }
                         value={ this.props.sequence }
                     /> 
                     <Sequence
                         numberHide
                         operatorBegin={ this.props.transformationCenter }
                         operatorEnd={ this.props.transformationCenter }
-                        style={ animationInnerSpinStyle(duration) }
+                        style={ animationInnerSpinStyle(DURATION) }
                         value={ this.props.sequence }
                     /> 
                     <Sequence
@@ -55,7 +55,7 @@ class CommutativeTransformation extends Component {
                         numberEnd={ this.props.transformationEnd - 1 }
                         operatorBegin={ this.props.transformationCenter + 1 }
                         operatorEnd={ this.props.transformationEnd - 1 }
-                        style={ animationInnerSpinStyle(duration) }
+                        style={ animationInnerSpinStyle(DURATION) }
                         value={ this.props.sequence }
                     /> 
                 </span>

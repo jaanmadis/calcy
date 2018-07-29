@@ -6,9 +6,10 @@ import Result from './Components/Controls/Result';
 import Submit from './Components/Controls/Submit';
 import Sequence from './Components/Sequence/Sequence';
 import { combineStyles } from './Utils/Utils';
-import { animationAccepted, animationRejected, inlineFlexStyle } from './Styles/Styles';
+import { animationAccepted, animationPresented, animationRejected, inlineFlexStyle } from './Styles/Styles';
 import { calculate, getCommutativeTransformationParams, getCommutativeTransformationResult, getSequence } from './Logic/Logic';
 
+const DURATION = 1000;
 const ENTER_KEY_CODE = 13;
 const VALID_INPUT = /^-?[0-9]*$/;
 
@@ -16,27 +17,11 @@ const style = {
     textAlign: 'center',
 }
 
-// plus, positive
-// plus, negative   ??
-// minus, positive  ??
-// minus, negative  ??
-
 class App extends Component {
-    state = {
-        sequence: [],
-        commutativeTransformationParams: undefined,
-        result: {
-            expected: 0,
-            value: '',
-            accepted: false,
-            rejected: false,
-        }
-    }
 
     constructor(props) {
         super(props);
-        this.state.sequence = getSequence(0, 20, 5); // generate negative numbers too zzz
-        this.state.result.expected = calculate(this.state.sequence);
+        this.state = this.getNewState();
     }    
 
     render() {
@@ -62,12 +47,23 @@ class App extends Component {
             );
         }
 
+        /*
+        
+        zzz
+        this is wrong
+        we want to animationRejected when user keeps submitting same thing over again
+        also, when user clear entry, we'll be back to animationPresented which is also incorrect
+        
+        */
+
         const resultStyle = 
             this.state.result.accepted
-                ? animationAccepted() 
-                : this.state.result.rejected 
-                    ? animationRejected() 
-                    : undefined;
+                ? animationAccepted(DURATION)
+                // : this.state.result.presented
+                //     ? animationPresented(DURATION)
+                    : this.state.result.rejected 
+                        ? animationRejected(DURATION) 
+                        : undefined;
 
         return(
             <div
@@ -85,6 +81,21 @@ class App extends Component {
                 />
             </div>
         );
+    }
+
+    getNewState = () => {
+        const sequence = getSequence(0, 20, 5);
+        return {
+            sequence: sequence,
+            commutativeTransformationParams: undefined,
+            result: {
+                expected: calculate(sequence),
+                value: '',
+                accepted: false,
+                presented: true,
+                rejected: false,
+            }
+        };
     }
 
     handleCommutativeTransformationDone = () => {
@@ -126,14 +137,23 @@ class App extends Component {
             this.setState({
                 result: newResult
             });
+            // if (accepted) {
+            //     setTimeout(this.onAccepted, DURATION);
+            // }
         }
-}
+    }
 
     handlePlusClick = (index) => {
         this.setState({
             commutativeTransformationParams: getCommutativeTransformationParams(this.state.sequence, index),
         });
     }
+
+    // onAccepted = () => {
+    //     this.setState(
+    //         this.getNewState()
+    //     );
+    // }
 }
 
 export default App;

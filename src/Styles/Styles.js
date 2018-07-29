@@ -31,6 +31,10 @@ export const animationAccepted = (duration = 1000) => ({
     animation: 'animation-accepted ' + duration + 'ms ease-out forwards',
 });
 
+export const animationPresented = (duration = 1000) => ({
+    animation: 'animation-presented ' + duration + 'ms ease-out forwards',
+});
+
 export const animationRejected = (duration = 1000) => ({
     animation: 'animation-rejected ' + duration + 'ms ease-out forwards',
 });
