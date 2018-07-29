@@ -2,6 +2,8 @@ import React from 'react';
 
 import Number from '../Number/Number';
 import Plus from '../Operators/Plus';
+import Minus from '../Operators/Minus';
+import { Operator } from '../../Logic/Logic';
 
 const shouldShow = (begin, end, hide, index) => (
     (hide === undefined) && (begin === undefined || begin <= index) && (end === undefined || index <= end)
@@ -18,11 +20,22 @@ const sequence = (props) => {
         }
         let operator = undefined;
         if (shouldShow(props.operatorBegin, props.operatorEnd, props.operatorHide, index)) {
-            operator = 
-                <Plus 
-                    index={ index }
-                    onClick={ props.onPlusClick }
-                />
+            switch (element.operator) {
+                case Operator.PLUS:
+                    operator = 
+                        <Plus 
+                            index={ index }
+                            onClick={ props.onPlusClick }
+                        />
+                    break;
+                case Operator.MINUS:
+                    operator = 
+                        <Minus 
+                            index={ index }
+                            onClick={ props.onMinusClick }
+                        />
+                    break;
+            }
         }
         if (number || operator) {
             return ( 

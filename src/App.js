@@ -23,7 +23,7 @@ class App extends Component {
             { operator: Operator.PLUS, number: 22, },
             { operator: Operator.PLUS, number: 3333, },
             { operator: Operator.PLUS, number: 44444, },
-            { operator: Operator.PLUS, number: 555, },
+            { operator: Operator.MINUS, number: 555, },
             { operator: Operator.PLUS, number: 66, },
             { operator: Operator.PLUS, number: 7, },
         ],
