@@ -35,6 +35,7 @@ const sequence = (props) => {
                             onClick={ props.onMinusClick }
                         />
                     break;
+                default:
             }
         }
         if (number || operator) {

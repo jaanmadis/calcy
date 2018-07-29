@@ -1,7 +1,7 @@
 export function calculate(sequence) {
     // zzz error checking
     let result = 0;
-    sequence.map((element) => {
+    sequence.forEach((element) => {
         switch (element.operator) {
             case Operator.PLUS:
                 result = result + element.number;
@@ -9,6 +9,7 @@ export function calculate(sequence) {
             case Operator.MINUS:
                 result = result - element.number;
                 break;
+            default:
         }
     });
     return result;
