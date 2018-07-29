@@ -66,8 +66,8 @@ class App extends Component {
                         ? animationRejected(ANIMATION_DURATION) 
                         : undefined;
 
-        if (resultStyle) {
-            setTimeout(this.onAnimationTimeout, ANIMATION_DURATION);
+        if (resultStyle && !this.animationHandle) {
+            this.animationHandle = setTimeout(this.onAnimationTimeout, ANIMATION_DURATION);
         }
 
         return(
