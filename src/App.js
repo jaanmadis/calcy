@@ -77,9 +77,7 @@ class App extends Component {
             negation = (
                 <NegationTransformation 
                     sequence={ this.state.sequence }
-                    transformationBegin={ this.state.negationTransformationParams.begin }
                     transformationCenter={ this.state.negationTransformationParams.center }
-                    transformationEnd={ this.state.negationTransformationParams.end }
                 />
             );
         }

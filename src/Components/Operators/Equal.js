@@ -10,7 +10,7 @@ const style = {
 const equal = (props) => {
     return(
         <span 
-            onClick={ props.onClick ? () => props.onClick(props.id) : undefined }
+            onClick={ props.onClick ? () => props.onClick(props.index) : undefined }
             style={ combineStyles([style, props.style]) }
         >
             { '=' }

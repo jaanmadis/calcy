@@ -18,9 +18,7 @@ export function calculate(sequence) {
 export function getNegationTransformationParams(sequence, index) {
     // zzz error checking
     return {
-        begin: 1,
         center: index,
-        end: 3,
     }
 }
 
