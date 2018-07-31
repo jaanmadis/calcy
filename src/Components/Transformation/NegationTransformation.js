@@ -1,51 +1,41 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-import Minus from '../Operators/Minus';
-import Number from '../Number/Number';
-import Plus from '../Operators/Plus';
+import Sequence from '../Sequence/Sequence';
 import { combineStyles } from '../../Utils/Utils';
-import { inlineFlexStyle, animationSlideLeft } from '../../Styles/Styles';
+import { inlineFlexStyle, animationCollapseRight, animationCollapseLeft } from '../../Styles/Styles';
 
-const negation = () => {
-    return (
-        <span>
-            <Minus />
-            <Plus />
-            <Number
-                value={ -3 }
-            />
-            <Number
-                value={ 3 }
-            />
-
-
-            <span 
-                style={ combineStyles([inlineFlexStyle, animationSlideLeft]) }
-            >
-                <Minus />
+class NegationTransformation extends Component {
+    render() {
+        if (
+            this.props.transformationBegin === undefined 
+            || this.props.transformationCenter === undefined 
+            || this.props.transformationEnd === undefined 
+            // || this.props.transformationBegin >= this.props.transformationCenter
+            // || this.props.transformationCenter >= this.props.transformationEnd
+            // || this.props.transformationBegin < 0
+            // || this.props.transformationCenter <= 0 
+            // || this.props.transformationEnd > this.props.sequence.length
+        ) {
+            return undefined;
+        }
+        return (
+            <span>
+                <Sequence
+                    style={ combineStyles([inlineFlexStyle, animationCollapseRight()]) }
+                    operatorBegin={ 1 }
+                    operatorEnd={ this.props.transformationCenter }
+                    numberEnd={ this.props.transformationCenter - 1 }
+                    value={ this.props.sequence }
+                />            
+                <Sequence
+                    style={ combineStyles([inlineFlexStyle, animationCollapseLeft()]) }
+                    operatorBegin={ this.props.transformationCenter + 1 }
+                    numberBegin={ this.props.transformationCenter }
+                    value={ this.props.sequence }
+                />            
             </span>
-        </span>
-    );
+        );
+    }
 }
 
-export default negation;
-
-/**
- * 
- *         const zStyle = {
-            position: 'absolute',
-            zIndex: '1',
-        }
-            <span
-                style={ zStyle }
-            >
-                ZZZZZZZZ
-            </span>
-            <span>
-                AAAAAAAAAAAAA
-            </span>
-            <br/>
-                <Negation />
-
- * 
- */
+export default NegationTransformation;

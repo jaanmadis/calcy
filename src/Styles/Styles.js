@@ -38,3 +38,13 @@ export const animationPresented = (duration = 1000) => ({
 export const animationRejected = (duration = 1000) => ({
     animation: 'animation-rejected ' + duration + 'ms ease-out forwards',
 });
+
+export const animationCollapseRight = (duration = 1000) => ({
+    animation: 'animation-collapse-right ' + duration + 'ms ease-in-out forwards',
+    border: '1px solid #ff0000',
+});
+
+export const animationCollapseLeft = (duration = 1000) => ({
+    animation: 'animation-collapse-left ' + duration + 'ms ease-in-out forwards',
+    border: '1px solid #00ff00',
+});

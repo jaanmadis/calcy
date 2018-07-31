@@ -15,6 +15,15 @@ export function calculate(sequence) {
     return result;
 }
 
+export function getNegationTransformationParams(sequence, index) {
+    // zzz error checking
+    return {
+        begin: 1,
+        center: index,
+        end: 3,
+    }
+}
+
 export function getCommutativeTransformationParams(sequence, index) {
     // zzz error checking
     return {

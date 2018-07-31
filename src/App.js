@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import CommutativeTransformation from './Components/Transformation/CommutativeTransformation';
+import NegationTransformation from './Components/Transformation/NegationTransformation';
 import Equal from './Components/Operators/Equal';
 import Result from './Components/Controls/Result';
 import Submit from './Components/Controls/Submit';
@@ -8,7 +9,7 @@ import Sequence from './Components/Sequence/Sequence';
 import Timer from './Components/Timer/Timer';
 import { combineStyles } from './Utils/Utils';
 import { animationAccepted, animationPresented, animationRejected, inlineFlexStyle } from './Styles/Styles';
-import { calculate, getCommutativeTransformationParams, getCommutativeTransformationResult, getSequence } from './Logic/Logic';
+import { calculate, getNegationTransformationParams, getCommutativeTransformationParams, getCommutativeTransformationResult, getSequence } from './Logic/Logic';
 
 const ANIMATION_DURATION = 1000;
 const ENTER_KEY_CODE = 13;
@@ -49,6 +50,7 @@ class App extends Component {
         } else {
             sequence = (
                 <Sequence
+                    onNumberClick={ this.handleNumberClick }
                     onPlusClick={ this.handlePlusClick }
                     operatorBegin={ 1 }
                     style={ inlineFlexStyle }
@@ -70,6 +72,18 @@ class App extends Component {
             this.animationHandle = setTimeout(this.onAnimationTimeout, ANIMATION_DURATION);
         }
 
+        let negation = undefined;
+        if (this.state.negationTransformationParams) {
+            negation = (
+                <NegationTransformation 
+                    sequence={ this.state.sequence }
+                    transformationBegin={ this.state.negationTransformationParams.begin }
+                    transformationCenter={ this.state.negationTransformationParams.center }
+                    transformationEnd={ this.state.negationTransformationParams.end }
+                />
+            );
+        }
+
         return(
             <div
                 style={ combineStyles([style, resultStyle]) }
@@ -88,6 +102,7 @@ class App extends Component {
                     created={ this.state.created + ANIMATION_DURATION }
                     stopped={ this.state.result.accepted }
                 />
+                { negation }
             </div>
         );
     }
@@ -97,6 +112,7 @@ class App extends Component {
         return {
             sequence: sequence,
             commutativeTransformationParams: undefined,
+            negationTransformationParams: undefined,
             result: {
                 expected: calculate(sequence),
                 value: '',
@@ -146,6 +162,14 @@ class App extends Component {
             newResult.rejected = !accepted;
             this.setState({
                 result: newResult
+            });
+        }
+    }
+
+    handleNumberClick = (index) => {
+        if (index > 0 && this.state.sequence[index].number < 0) {
+            this.setState({
+                negationTransformationParams: getNegationTransformationParams(this.state.sequence, index),
             });
         }
     }

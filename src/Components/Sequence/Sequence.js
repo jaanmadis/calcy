@@ -14,7 +14,9 @@ const sequence = (props) => {
         let number = undefined
         if (shouldShow(props.numberBegin, props.numberEnd, props.numberHide, index)) {
             number = 
-                <Number 
+                <Number
+                    index={ index }                
+                    onClick={ props.onNumberClick }
                     value={ element.number } 
                 />;
         }
