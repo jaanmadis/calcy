@@ -85,14 +85,15 @@ class App extends Component {
                     onClick={ this.handleSubmitClick }
                 />
                 <Timer 
-                    created={ this.state.created }
+                    created={ this.state.created + ANIMATION_DURATION }
+                    stopped={ this.state.result.accepted }
                 />
             </div>
         );
     }
 
     getNewState = () => {
-        const sequence = getSequence(0, 20, 5);
+        const sequence = getSequence(-20, 20, 5);
         return {
             sequence: sequence,
             commutativeTransformationParams: undefined,

@@ -14,17 +14,25 @@ class Timer extends Component {
 
     handle = undefined;
     state = {
-        duration: ''
+        duration: undefined
     }
 
     componentWillUnmount() {
-        if (this.handle !== undefined) {
-            clearInterval(this.handle);
-        }
+        this.stopTimer();
     }
 
     componentDidMount() {
-        this.handle = setInterval(this.onInterval, INTERVAL);
+        if (!!!this.props.stopped) {
+            this.startTimer();
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if(this.props.stopped && !prevProps.stopped) {
+            this.stopTimer();
+        } else if(!this.props.stopped && prevProps.stopped) {
+            this.startTimer();
+        }
     }
 
     render() {
@@ -32,15 +40,28 @@ class Timer extends Component {
             <div
                 style={ style }
             >
-                { this.state.duration }
+                { this.state.duration >= 0 ? this.state.duration + 's' : undefined }
             </div>
         );
     }
 
     onInterval = () => {
         this.setState({
-            duration: Number.parseFloat((Date.now() - this.props.created) / 1000).toFixed(1) + 's'
+            duration: Number.parseFloat((Date.now() - this.props.created) / 1000).toFixed(1)
         });
+    }
+
+    startTimer = () => {
+        if (this.handle === undefined) {
+            this.handle = setInterval(this.onInterval, INTERVAL);
+        }
+    }
+
+    stopTimer = () => {
+        if (this.handle !== undefined) {
+            clearInterval(this.handle);
+            this.handle = undefined;
+        }
     }
 }
 
