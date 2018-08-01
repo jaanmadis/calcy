@@ -17,7 +17,8 @@ const sequence = (props) => {
                 <Number
                     index={ index }                
                     onClick={ props.onNumberClick }
-                    value={ element.number } 
+                    style={ props.numberStyle }
+                    value={ element.number }
                 />;
         }
         let operator = undefined;
@@ -28,6 +29,7 @@ const sequence = (props) => {
                         <Plus 
                             index={ index }
                             onClick={ props.onPlusClick }
+                            style={ props.operatorStyle }
                         />
                     break;
                 case Operator.MINUS:
@@ -35,6 +37,7 @@ const sequence = (props) => {
                         <Minus 
                             index={ index }
                             onClick={ props.onMinusClick }
+                            style={ props.operatorStyle }
                         />
                     break;
                 default:
