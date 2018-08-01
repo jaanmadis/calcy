@@ -72,7 +72,7 @@ class App extends Component {
             );
         }
 
-        const resultStyle = 
+        const validationStyle = 
             this.state.result.accepted
                 ? animationAccepted(durations.RESULT)
                 : this.state.result.presented
@@ -81,13 +81,13 @@ class App extends Component {
                         ? animationRejected(durations.RESULT) 
                         : undefined;
 
-        if (resultStyle && !this.animationHandle) {
+        if (validationStyle && !this.animationHandle) {
             this.animationHandle = setTimeout(this.onAnimationTimeout, durations.RESULT);
         }
 
         return(
             <div
-                style={ combineStyles([style, resultStyle]) }
+                style={ combineStyles([style, validationStyle]) }
             >
                 { sequence }
                 <span

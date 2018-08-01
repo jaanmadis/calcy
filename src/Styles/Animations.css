@@ -109,6 +109,25 @@
     }
 }
 
+@keyframes animation-jump {
+    0% {
+        transform: translateY(0px) translateX(0em);
+        opacity: 1;
+    }
+    70% {
+        transform: translateY(-80px) translateX(1.3em) rotate(90deg);
+        opacity: 1;
+    }
+    80% {
+        transform: translateY(-80px) translateX(1.3em) rotate(90deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0px) translateX(1.3em) rotate(90deg);
+        opacity: 0;
+    }
+}
+
 /* TODO: get these colors from Colors.js eiter during runtime or build time */
 
 @keyframes animation-negation-color {

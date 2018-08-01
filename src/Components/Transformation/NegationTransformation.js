@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 
 import Sequence from '../Sequence/Sequence';
+import { Operator } from '../../Logic/Logic';
 import { combineStyles } from '../../Utils/Utils';
-import { inlineFlexStyle, animationCollapseRight, animationCollapseLeft, animationDrop, animationNegationColor } from '../../Styles/Styles';
+import { inlineFlexStyle, animationCollapseRight, animationCollapseLeft, animationDrop, animationJump, animationNegationColor } from '../../Styles/Styles';
 import { colorNeutralGray } from '../../Styles/Colors';
 import * as durations from '../../Styles/Durations';
 
@@ -29,7 +30,10 @@ class NegationTransformation extends Component {
             />;
         const transformationOperator =           
             <Sequence
-                style={ combineStyles([inlineFlexStyle, animationDrop(durations.NEGATION)]) }
+                style={ combineStyles([inlineFlexStyle, 
+                    this.props.sequence[this.props.transformationCenter].operator === Operator.PLUS
+                        ? animationDrop(durations.NEGATION)
+                        : animationJump(durations.NEGATION)]) }
                 numberHide
                 operatorBegin={ this.props.transformationCenter }
                 operatorEnd={ this.props.transformationCenter }

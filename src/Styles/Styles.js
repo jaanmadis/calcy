@@ -50,6 +50,10 @@ export const animationDrop = (duration) => ({
     animation: 'animation-drop ' + duration + 'ms ease-in forwards',
 });
 
+export const animationJump = (duration) => ({
+    animation: 'animation-jump ' + duration + 'ms linear forwards',
+});
+
 export const animationNegationColor = (duration) => ({
     animation: 'animation-negation-color ' + duration + 'ms linear forwards',
-})
+});
