@@ -4,6 +4,8 @@ import Sequence from '../Sequence/Sequence';
 import { combineStyles } from '../../Utils/Utils';
 import { inlineFlexStyle, animationCollapseRight, animationCollapseLeft } from '../../Styles/Styles';
 
+const ANIMATION_DURATION = 1000;
+
 class NegationTransformation extends Component {
     render() {
         if (
@@ -14,7 +16,7 @@ class NegationTransformation extends Component {
         }
         const transformationStart = 
             <Sequence
-                style={ combineStyles([inlineFlexStyle, animationCollapseRight()]) }
+                style={ combineStyles([inlineFlexStyle, animationCollapseRight(ANIMATION_DURATION)]) }
                 numberEnd={ this.props.transformationCenter - 1 }
                 operatorBegin={ 1 }
                 operatorEnd={ this.props.transformationCenter - 1 }
@@ -22,7 +24,7 @@ class NegationTransformation extends Component {
             />;
         const transformationOperator =           
             <Sequence
-                style={ combineStyles([inlineFlexStyle, animationCollapseRight()]) }
+                style={ combineStyles([inlineFlexStyle, animationCollapseRight(ANIMATION_DURATION)]) }
                 numberHide
                 operatorBegin={ this.props.transformationCenter }
                 operatorEnd={ this.props.transformationCenter }
@@ -30,7 +32,7 @@ class NegationTransformation extends Component {
             />;
         const transformationNumber =            
             <Sequence
-                style={ combineStyles([inlineFlexStyle, animationCollapseLeft()]) }
+                style={ combineStyles([inlineFlexStyle, animationCollapseLeft(ANIMATION_DURATION)]) }
                 numberBegin={ this.props.transformationCenter }
                 numberEnd={ this.props.transformationCenter }
                 operatorHide
@@ -40,7 +42,7 @@ class NegationTransformation extends Component {
         if (this.props.sequence.length > 2) {
             transformationEnd =
                 <Sequence
-                    style={ combineStyles([inlineFlexStyle, animationCollapseLeft()]) }
+                    style={ combineStyles([inlineFlexStyle, animationCollapseLeft(ANIMATION_DURATION)]) }
                     numberBegin={ this.props.transformationCenter + 1 }
                     operatorBegin={ this.props.transformationCenter + 1 }
                     value={ this.props.sequence }
