@@ -15,13 +15,6 @@ export function calculate(sequence) {
     return result;
 }
 
-export function getNegationTransformationParams(sequence, index) {
-    // zzz error checking
-    return {
-        center: index,
-    }
-}
-
 export function getCommutativeTransformationParams(sequence, index) {
     // zzz error checking
     return {
@@ -37,6 +30,29 @@ export function getCommutativeTransformationResult(sequence, params) {
     const elements = newSequence.splice(params.center, 1)[0];
     newSequence.splice(params.begin, 0, elements)
     return newSequence;
+}
+
+export function getNegationTransformationParams(sequence, index) {
+    // zzz error checking
+    return {
+        center: index,
+    }
+}
+
+export function getNegationTransformationResult(sequence, params) {
+    // zzz error checking
+    const newSequence = [...sequence];
+    switch (newSequence[params.center].operator) {
+        case Operator.PLUS:
+            newSequence[params.center].operator = Operator.MINUS;
+            break;
+        case Operator.MINUS:
+            newSequence[params.center].operator = Operator.PLUS;
+            break;
+        default:
+    }
+    newSequence[params.center].number = -newSequence[params.center].number;
+    return newSequence
 }
 
 export function getSequence(min, max, maxLength) {

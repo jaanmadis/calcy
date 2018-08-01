@@ -8,17 +8,20 @@ import Submit from './Components/Controls/Submit';
 import Sequence from './Components/Sequence/Sequence';
 import Timer from './Components/Timer/Timer';
 import { combineStyles } from './Utils/Utils';
-import { animationAccepted, animationPresented, animationRejected, inlineFlexStyle } from './Styles/Styles';
-import { calculate, getNegationTransformationParams, getCommutativeTransformationParams, getCommutativeTransformationResult, getSequence } from './Logic/Logic';
+import { animationAccepted, animationPresented, animationRejected, animationCollapseLeft, inlineFlexStyle } from './Styles/Styles';
+import { calculate, 
+    getCommutativeTransformationParams, getCommutativeTransformationResult, 
+    getNegationTransformationParams, getNegationTransformationResult, 
+    getSequence } from './Logic/Logic';
+import * as durations from './Styles/Durations';
 
-const ANIMATION_DURATION = 1000;
 const ENTER_KEY_CODE = 13;
 const VALID_INPUT = /^-?[0-9]*$/;
 
 const style = {
     padding: '4em',
     textAlign: 'center',
-}
+};
 
 class App extends Component {
 
@@ -37,6 +40,7 @@ class App extends Component {
 
     render() {
         let sequence = undefined;
+        let postSequenceStyle = undefined;
         if (this.state.commutativeTransformationParams) {
             sequence = (
                 <CommutativeTransformation 
@@ -47,6 +51,15 @@ class App extends Component {
                     transformationEnd={ this.state.commutativeTransformationParams.end }
                 />
             );
+        } else if (this.state.negationTransformationParams) {
+            sequence = (
+                <NegationTransformation
+                    onDone={ this.handleNegationTransformationDone } 
+                    sequence={ this.state.sequence }
+                    transformationCenter={ this.state.negationTransformationParams.center }
+                />
+            );
+            postSequenceStyle = combineStyles([inlineFlexStyle, animationCollapseLeft(durations.NEGATION)]);
         } else {
             sequence = (
                 <Sequence
@@ -61,25 +74,15 @@ class App extends Component {
 
         const resultStyle = 
             this.state.result.accepted
-                ? animationAccepted(ANIMATION_DURATION)
+                ? animationAccepted(durations.RESULT)
                 : this.state.result.presented
-                    ? animationPresented(ANIMATION_DURATION)
+                    ? animationPresented(durations.RESULT)
                     : this.state.result.rejected 
-                        ? animationRejected(ANIMATION_DURATION) 
+                        ? animationRejected(durations.RESULT) 
                         : undefined;
 
         if (resultStyle && !this.animationHandle) {
-            this.animationHandle = setTimeout(this.onAnimationTimeout, ANIMATION_DURATION);
-        }
-
-        let negation = undefined;
-        if (this.state.negationTransformationParams) {
-            negation = (
-                <NegationTransformation 
-                    sequence={ this.state.sequence }
-                    transformationCenter={ this.state.negationTransformationParams.center }
-                />
-            );
+            this.animationHandle = setTimeout(this.onAnimationTimeout, durations.RESULT);
         }
 
         return(
@@ -87,20 +90,23 @@ class App extends Component {
                 style={ combineStyles([style, resultStyle]) }
             >
                 { sequence }
-                <Equal />
-                <Result 
-                    onChange={ this.handleResultChange }
-                    onKeyDown={ this.handleResultKeyDown }
-                    value={ this.state.result.value }
-                />
-                <Submit 
-                    onClick={ this.handleSubmitClick }
-                />
+                <span
+                    style={ combineStyles([inlineFlexStyle, postSequenceStyle]) }
+                >
+                    <Equal />
+                    <Result 
+                        onChange={ this.handleResultChange }
+                        onKeyDown={ this.handleResultKeyDown }
+                        value={ this.state.result.value }
+                    />
+                    <Submit 
+                        onClick={ this.handleSubmitClick }
+                    />
+                </span>
                 <Timer 
-                    created={ this.state.created + ANIMATION_DURATION }
+                    created={ this.state.created + durations.RESULT }
                     stopped={ this.state.result.accepted }
                 />
-                { negation }
             </div>
         );
     }
@@ -126,6 +132,13 @@ class App extends Component {
         this.setState({
             sequence: getCommutativeTransformationResult(this.state.sequence, this.state.commutativeTransformationParams),
             commutativeTransformationParams: undefined,
+        });
+    }
+
+    handleNegationTransformationDone = () => {
+        this.setState({
+            sequence: getNegationTransformationResult(this.state.sequence, this.state.negationTransformationParams),
+            negationTransformationParams: undefined,
         });
     }
 
