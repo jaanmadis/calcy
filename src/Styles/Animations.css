@@ -97,3 +97,25 @@
         transform: translateX(-1.2em);
     }
 }
+
+@keyframes animation-drop {
+    0% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+}
+
+/* TODO: get these colors from Colors.js eiter during runtime or build time */
+
+@keyframes animation-negation-color {
+    0% {
+        color: #0079D1;
+    }
+    100% {
+        color: #C75300;
+    }
+}

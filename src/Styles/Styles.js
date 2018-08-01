@@ -4,7 +4,6 @@ import { colorPositive, colorNegative } from './Colors';
 
 export const inlineFlexStyle = {
     display: 'inline-flex',
-//    border: '1px solid #AA6817',
 }
 
 export const positiveStyle = {
@@ -41,10 +40,16 @@ export const animationRejected = (duration = 1000) => ({
 
 export const animationCollapseRight = (duration = 1000) => ({
     animation: 'animation-collapse-right ' + duration + 'ms ease-in-out forwards',
-    border: '1px solid #ff0000',
 });
 
 export const animationCollapseLeft = (duration = 1000) => ({
     animation: 'animation-collapse-left ' + duration + 'ms ease-in-out forwards',
-    border: '1px solid #00ff00',
 });
+
+export const animationDrop = (duration) => ({
+    animation: 'animation-drop ' + duration + 'ms ease-in forwards',
+});
+
+export const animationNegationColor = (duration) => ({
+    animation: 'animation-negation-color ' + duration + 'ms linear forwards',
+})
