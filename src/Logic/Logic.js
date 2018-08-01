@@ -67,15 +67,13 @@ export function getSequence(min, max, maxLength) {
     const sequence = [element];
     const length = rnd(2, Math.max(2, maxLength));
     for (let i = 1; i < length; ++i) {
-        if (true) {
+        if (Math.floor(Math.random() * 2) === 0) {
             element = {    
                 operator: Operator.PLUS,
                 number: rnd(Math.max(min, min - subtotal), Math.min(max, max - subtotal))
             }
             subtotal = subtotal + element.number;
-        }
-        // generate minus ops too zzz
-        else {
+        } else {
             element = {
                 operator: Operator.MINUS,
                 number: rnd(Math.max(min, min + subtotal), Math.min(max, max + subtotal))
