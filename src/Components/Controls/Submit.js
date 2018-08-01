@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
 import { combineStyles } from '../../Utils/Utils';
-import { colorBlackGray, colorDarkGray, colorDarkerGray, colorNeutralGray } from '../../Styles/Colors';
+import { colorBlackGray, colorLighterGray, colorLightGray, colorNeutralGray } from '../../Styles/Colors';
 
 const style = {
-    backgroundColor: colorDarkGray,
+    backgroundColor: colorLighterGray,
     border: '4px solid ' + colorNeutralGray,
     borderRadius: '10px',
     color: colorNeutralGray,
@@ -16,7 +16,7 @@ const style = {
 }
 
 const hoverStyle = {
-    backgroundColor: colorDarkerGray,
+    backgroundColor: colorLightGray,
     color: colorBlackGray,
 }
 
