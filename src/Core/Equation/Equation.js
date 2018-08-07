@@ -19,15 +19,16 @@ import * as durations from '../../Styles/Durations';
 const ENTER_KEY_CODE = 13;
 const VALID_INPUT = /^-?[0-9]*$/;
 
-const style = {
+const innerStyle = {
     padding: '4em',
     textAlign: 'center',
-
-    // zzz fix the width and centering: animationRejected causes scrollbars
-    backgroundColor: 'red',
-
-    width: '90%',
+    width: '70%',
 };
+
+const outerStyle = {
+    display: 'flex',    
+    justifyContent: 'center',
+}
 
 class Equation extends Component {
 
@@ -93,26 +94,30 @@ class Equation extends Component {
 
         return(
             <div
-                style={ combineStyles([style, validationStyle]) }
+                style={ outerStyle }
             >
-                { sequence }
-                <span
-                    style={ combineStyles([inlineFlexStyle, postSequenceStyle]) }
+                <div
+                    style={ combineStyles([innerStyle, validationStyle]) }
                 >
-                    <Equal />
-                    <Result 
-                        onChange={ this.handleResultChange }
-                        onKeyDown={ this.handleResultKeyDown }
-                        value={ this.state.result.value }
+                    { sequence }
+                    <span
+                        style={ combineStyles([inlineFlexStyle, postSequenceStyle]) }
+                    >
+                        <Equal />
+                        <Result 
+                            onChange={ this.handleResultChange }
+                            onKeyDown={ this.handleResultKeyDown }
+                            value={ this.state.result.value }
+                        />
+                        <Submit 
+                            onClick={ this.handleSubmitClick }
+                        />
+                    </span>
+                    <Timer 
+                        created={ this.state.created + durations.RESULT }
+                        stopped={ this.state.result.accepted }
                     />
-                    <Submit 
-                        onClick={ this.handleSubmitClick }
-                    />
-                </span>
-                <Timer 
-                    created={ this.state.created + durations.RESULT }
-                    stopped={ this.state.result.accepted }
-                />
+                </div>
             </div>
         );
     }
