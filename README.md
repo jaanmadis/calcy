@@ -1,3 +1,23 @@
+TODO
+
+
+0. deploy
+1. usernames, login, history
+2. helper ruler thing
+3. clicking on positive number
+4. clicking on minus
+5. achievements
+6. configurations for how long sequence is and whats the range
+
+
+
+
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
