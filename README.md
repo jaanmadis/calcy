@@ -8,6 +8,7 @@ TODO
 4. clicking on minus
 5. achievements
 6. configurations for how long sequence is and whats the range
+7. mobile UX
 
 
 
