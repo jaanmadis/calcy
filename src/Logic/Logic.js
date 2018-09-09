@@ -16,9 +16,14 @@ export function calculate(sequence) {
 
 export function getCommutativeTransformationParams(sequence, index) {
     // zzz error checking
-    // zzz // this looks off now w/ minus operators, need to move the begin to first associative operator
+
+    let begin = index - 1;
+    while (sequence[begin].operator !== Operator.PLUS) {
+        begin--;
+    }
+
     return {
-        begin: index - 1,
+        begin: begin,
         center: index,
         end: index + 1
     };
