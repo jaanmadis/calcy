@@ -1,21 +1,19 @@
 TODO
 
-
-0. deploy
 1. usernames, login, history
-2. helper ruler thing
-3. clicking on positive number
-4. clicking on minus
-5. achievements
-6. configurations for how long sequence is and whats the range
-7. mobile UX
+2. build support for "levels"
+3. build basic one operator positive number addition level
+4. deploy
 
 
 
-
-
-
-
+x. helper ruler thing
+x. clicking on positive number
+x. clicking on minus
+x. achievements
+x. configurations for how long sequence is and whats the range
+x. mobile UX
+x. commutative UX only after we have () -s
 
 
 
